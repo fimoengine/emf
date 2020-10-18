@@ -1,0 +1,1 @@
+# emf_config_get_num_properties

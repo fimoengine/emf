@@ -1,0 +1,1 @@
+# emf_config_namespace_exists
