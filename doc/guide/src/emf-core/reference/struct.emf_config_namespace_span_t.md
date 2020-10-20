@@ -12,7 +12,7 @@ A span of namespaces.
 ## Fields
 
 - **data**: [`emf_config_namespace_t`](./struct.emf_config_namespace_t.md)
-    
+
     The start of the span.
 
 - **length**: `size_t`

@@ -1,9 +1,11 @@
 # Config system
 
 ## Introduction
+
 The `config` system consists of namespaces and properties. Namespaces can contain properties and other namespaces. Properties are homogenous arrays of values. A namespace- or property-name must be a `UTF-8` string. All Namespaces are implicitly nested inside the global namespace.
 
 ### Properties
+
 Properties can have the following types:
 
 - Bool ([`emf_bool_t`](../reference/type.emf_bool_t.md))

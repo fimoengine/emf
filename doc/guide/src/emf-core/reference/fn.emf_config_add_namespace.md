@@ -10,7 +10,7 @@ Creates a new namespace, which can hold properties. Multiple namespaces can be n
 
 ## Undefined Behaviour
 
-The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)). <br>
+The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).  
 Furthermore, the caller must ensure that the following preconditions hold:
 
 ```c

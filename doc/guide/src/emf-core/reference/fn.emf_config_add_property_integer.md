@@ -8,13 +8,14 @@ void emf_config_add_property_integer(
     int64_t default_value
 );
 ```
+
 Adds an integer property to a namespace.
 
 Adds an integer property to the supplied namespace. The namespace `NULL` and the empty namespace refer to the global namespace.
 
 ## Undefined Behaviour
 
-The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)). <br>
+The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).  
 Furthermore, the caller must ensure that the following preconditions hold:
 
 ```c

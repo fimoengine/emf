@@ -12,7 +12,7 @@ A span of property infos.
 ## Fields
 
 - **data**: [`emf_config_property_info_t`](./struct.emf_config_property_info_t.md)
-    
+
     The start of the span.
 
 - **length**: `size_t`
