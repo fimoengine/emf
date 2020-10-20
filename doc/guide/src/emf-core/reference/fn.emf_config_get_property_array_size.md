@@ -1,4 +1,4 @@
-# Function emf_config_get_property_array_size
+# Function `emf_config_get_property_array_size`
 
 ```c
 size_t emf_config_get_property_array_size(

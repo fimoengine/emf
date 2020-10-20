@@ -1,4 +1,4 @@
-# Function emf_config_get_num_namespaces
+# Function `emf_config_get_num_namespaces`
 
 ```c
 size_t emf_config_get_num_namespaces(

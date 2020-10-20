@@ -1,4 +1,4 @@
-# Function emf_config_get_num_properties
+# Function `emf_config_get_num_properties`
 
 ```c
 size_t emf_config_get_num_properties(
