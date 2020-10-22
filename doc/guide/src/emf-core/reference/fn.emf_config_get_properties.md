@@ -30,5 +30,5 @@ ASSERT_NE(
 );
 ASSERT(
     buffer->length >= emf_config_get_num_properties(group, recursive)
-)
+);
 ```
