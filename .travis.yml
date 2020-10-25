@@ -22,4 +22,4 @@ deploy:
   local-dir: doc/guide/book
   keep-history: false
   on:
-    branch: master
+    branch: main
