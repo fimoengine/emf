@@ -2,8 +2,10 @@ import click
 import json
 import time
 
+
 def get_version_string(major, minor, patch):
     return "{}.{}.{}".format(major, minor, patch)
+
 
 def get_version_string_long(major, minor, patch, pre_release_type, pre_release_build):
     if pre_release_type == 0:
@@ -14,8 +16,10 @@ def get_version_string_long(major, minor, patch, pre_release_type, pre_release_b
 
         return get_version_string(major, minor, patch) + '-{}.{}'.format(pre_release_type_string, pre_release_build)
 
+
 def get_version_string_full(major, minor, patch, pre_release_type, pre_release_build, build):
     return get_version_string_long(major, minor, patch, pre_release_type, pre_release_build) + '+{}'.format(build)
+
 
 def get_build_number(build, version_dict):
     if build == -1:
@@ -25,9 +29,51 @@ def get_build_number(build, version_dict):
     else:
         return build
 
+
 @click.group()
 def cli():
     pass
+
+
+@click.command()
+@click.argument('version', type=click.File('r'))
+@click.argument('output', type=click.File('w'))
+@click.option('--source', default=7, help='1: Major, 2: Minor, 3: Patch, 4: Pre-release type, 5: Pre-release build, 6: Build, 7: Version, 8: Long version, 9: Full version')
+@click.option('--build', default=-1, help='The build version (-1 for UNIX timestamp, -2 for embedded build).')
+def extract(version, output, source, build):
+    version_dict = json.load(version)
+    major = version_dict['major']
+    minor = version_dict['minor']
+    patch = version_dict['patch']
+    pre_release_type = version_dict['pre_release_type']
+    pre_release_build = version_dict['pre_release_build']
+    build = get_build_number(build, version_dict)
+
+    version_string = get_version_string(major, minor, patch)
+    version_string_long = get_version_string_long(
+        major, minor, patch, pre_release_type, pre_release_build)
+    version_string_full = get_version_string_full(
+        major, minor, patch, pre_release_type, pre_release_build, build)
+
+    if source == 0:
+        output.write('{}'.format(major))
+    elif source == 1:
+        output.write('{}'.format(major))
+    elif source == 2:
+        output.write('{}'.format(patch))
+    elif source == 3:
+        output.write('{}'.format(pre_release_type))
+    elif source == 4:
+        output.write('{}'.format(pre_release_build))
+    elif source == 5:
+        output.write('{}'.format(build))
+    elif source == 6:
+        output.write('{}'.format(version_string))
+    elif source == 7:
+        output.write('{}'.format(version_string_long))
+    elif source == 8:
+        output.write('{}'.format(version_string_full))
+
 
 @click.command()
 @click.argument('version', type=click.File('r'))
@@ -42,12 +88,15 @@ def print(version, build):
     build = get_build_number(build, version_dict)
 
     version_string = get_version_string(major, minor, patch)
-    version_string_long = get_version_string_long(major, minor, patch, pre_release_type, pre_release_build)
-    version_string_full = get_version_string_full(major, minor, patch, pre_release_type, pre_release_build, build)
+    version_string_long = get_version_string_long(
+        major, minor, patch, pre_release_type, pre_release_build)
+    version_string_full = get_version_string_full(
+        major, minor, patch, pre_release_type, pre_release_build, build)
 
     click.echo("Version: {}".format(version_string))
     click.echo("Version long: {}".format(version_string_long))
     click.echo("Version full: {}".format(version_string_full))
+
 
 @click.command()
 @click.argument('input', type=click.File('r'))
@@ -76,33 +125,46 @@ def replace(input, output, version, build, major_key, minor_key, patch_key, pre_
     build = get_build_number(build, version_dict)
 
     version_string = get_version_string(major, minor, patch)
-    version_string_long = get_version_string_long(major, minor, patch, pre_release_type, pre_release_build)
-    version_string_full = get_version_string_full(major, minor, patch, pre_release_type, pre_release_build, build)
+    version_string_long = get_version_string_long(
+        major, minor, patch, pre_release_type, pre_release_build)
+    version_string_full = get_version_string_full(
+        major, minor, patch, pre_release_type, pre_release_build, build)
 
     major_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, major_key, suffix)
     minor_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, minor_key, suffix)
     patch_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, patch_key, suffix)
-    pre_release_type_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, pre_release_type_key, suffix)
-    pre_release_build_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, pre_release_build_key, suffix)
+    pre_release_type_key = '{0}{1}{2}{3}{0}'.format(
+        delimiter, prefix, pre_release_type_key, suffix)
+    pre_release_build_key = '{0}{1}{2}{3}{0}'.format(
+        delimiter, prefix, pre_release_build_key, suffix)
     build_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, build_key, suffix)
-    version_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, version_key, suffix)
-    version_long_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, version_long_key, suffix)
-    version_full_key = '{0}{1}{2}{3}{0}'.format(delimiter, prefix, version_full_key, suffix)
+    version_key = '{0}{1}{2}{3}{0}'.format(
+        delimiter, prefix, version_key, suffix)
+    version_long_key = '{0}{1}{2}{3}{0}'.format(
+        delimiter, prefix, version_long_key, suffix)
+    version_full_key = '{0}{1}{2}{3}{0}'.format(
+        delimiter, prefix, version_full_key, suffix)
 
     input_string = input.read()
     input_string = input_string.replace(major_key, '{}'.format(major))
     input_string = input_string.replace(minor_key, '{}'.format(minor))
     input_string = input_string.replace(patch_key, '{}'.format(patch))
-    input_string = input_string.replace(pre_release_type_key, '{}'.format(pre_release_type))
-    input_string = input_string.replace(pre_release_build_key, '{}'.format(pre_release_build))
+    input_string = input_string.replace(
+        pre_release_type_key, '{}'.format(pre_release_type))
+    input_string = input_string.replace(
+        pre_release_build_key, '{}'.format(pre_release_build))
     input_string = input_string.replace(build_key, '{}'.format(build))
-    input_string = input_string.replace(version_key, '{}'.format(version_string))
-    input_string = input_string.replace(version_long_key, '{}'.format(version_string_long))
-    input_string = input_string.replace(version_full_key, '{}'.format(version_string_full))
+    input_string = input_string.replace(
+        version_key, '{}'.format(version_string))
+    input_string = input_string.replace(
+        version_long_key, '{}'.format(version_string_long))
+    input_string = input_string.replace(
+        version_full_key, '{}'.format(version_string_full))
 
     output.write(input_string)
 
 
+cli.add_command(extract)
 cli.add_command(print)
 cli.add_command(replace)
 
