@@ -107,14 +107,14 @@ void EMF_CALL_C emf_module_unsafe_link_module(emf_module_handle_t module_handle,
     emf_module_loader_module_handle_t loader_module_handle,
     const emf_interface_info_span_t* EMF_MAYBE_NULL public_interfaces) EMF_NOEXCEPT
 {
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     if (public_interfaces->data != nullptr && public_interfaces->length > 0) {
         for (std::size_t i { 0 }; i < public_interfaces->length; i++) {
             EMF_ASSERT_ERROR(
                 emf_module_interface_exists(&public_interfaces->data[i]) == emf_bool_false, "emf_module_unsafe_link_module()")
         }
     }
-#endif // EMF_ENABLE_ERROR_CHECKING
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     emf_binding_interface->module_unsafe_link_module_fn(module_handle, loader_handle, loader_module_handle, public_interfaces);
 }
@@ -134,13 +134,13 @@ EMF_NODISCARD emf_module_loader_interface_t EMF_CALL_C emf_module_unsafe_get_loa
 EMF_NODISCARD emf_module_handle_t EMF_CALL_C emf_module_load(emf_module_loader_handle_t loader_handle,
     const emf_interface_info_span_t* EMF_MAYBE_NULL public_interfaces, const emf_path_t* EMF_NOT_NULL module_path) EMF_NOEXCEPT
 {
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     if (public_interfaces->data != nullptr && public_interfaces->length > 0) {
         for (std::size_t i { 0 }; i < public_interfaces->length; i++) {
             EMF_ASSERT_ERROR(emf_module_interface_exists(&public_interfaces->data[i]) == emf_bool_false, "emf_module_load()")
         }
     }
-#endif // EMF_ENABLE_ERROR_CHECKING
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     EMF_ASSERT_ERROR(module_path != nullptr, "emf_module_load()")
     return emf_binding_interface->module_load_fn(loader_handle, public_interfaces, module_path);

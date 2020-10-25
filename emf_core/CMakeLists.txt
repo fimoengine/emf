@@ -11,8 +11,8 @@ if(${CMAKE_SOURCE_DIR} EQUAL ${CMAKE_CURRENT_SOURCE_DIR})
   endif()
 
   # The path to the version management script
-  set(EMF_VERSION_MANAGEMENT_SCRIPT
-      "../${CMAKE_SOURCE_DIR}/scripts/version_management.py")
+  set_version_script_path(
+    "../${CMAKE_SOURCE_DIR}/scripts/version_management.py")
 endif()
 
 extract_version(${CMAKE_CURRENT_SOURCE_DIR}/version.json EMF_CORE_VERSION)
@@ -56,6 +56,10 @@ target_include_directories(
   INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
             $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
             $<INSTALL_INTERFACE:include>)
+
+if(EMF_ENABLE_DEBUG_ASSERTIONS)
+  target_compile_definitions(emf_core INTERFACE EMF_ENABLE_DEBUG_ASSERTIONS)
+endif()
 
 target_compile_options(
   emf_core

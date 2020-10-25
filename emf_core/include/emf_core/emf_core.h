@@ -25,13 +25,13 @@
         emf_panic("Condition: " #Condition " Error: " Error);                                                                    \
     }
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
 #define EMF_ASSERT(Condition) EMF_REQUIRE(Condition)
 #define EMF_ASSERT_ERROR(Condition, Error) EMF_REQUIRE_ERROR(Condition, Error)
 #else
 #define EMF_ASSERT(Condition)
 #define EMF_ASSERT_ERROR(Condition, Error)
-#endif // EMF_ENABLE_ERROR_CHECKING
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
 #ifdef __cplusplus
 namespace EMF::Core::C {

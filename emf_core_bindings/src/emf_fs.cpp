@@ -27,12 +27,12 @@ void EMF_CALL_C emf_fs_create_file(const emf_path_t* EMF_NOT_NULL filename, cons
     EMF_ASSERT_ERROR(filename != nullptr, "emf_fs_create_file()")
     EMF_ASSERT_ERROR(emf_fs_exists(filename) == emf_bool_false, "emf_fs_create_file()")
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     auto parent { emf_fs_get_parent(filename) };
     EMF_ASSERT_ERROR(emf_fs_exists(&parent) == emf_bool_true, "emf_fs_create_file()")
     EMF_ASSERT_ERROR(emf_fs_is_virtual(&parent) == emf_bool_false, "emf_fs_create_file()")
     EMF_ASSERT_ERROR(emf_fs_get_access_mode(&parent) == emf_file_access_mode_write, "emf_fs_create_file()")
-#endif
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     emf_binding_interface->fs_create_file_fn(filename, options);
 }
@@ -46,12 +46,12 @@ void EMF_CALL_C emf_fs_create_link(
     EMF_ASSERT_ERROR(emf_fs_exists(destination) == emf_bool_false, "emf_fs_create_link()")
     EMF_ASSERT_ERROR(emf_fs_is_virtual(source) == emf_bool_false, "emf_fs_create_link()")
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     auto destination_parent { emf_fs_get_parent(destination) };
     EMF_ASSERT_ERROR(emf_fs_exists(&destination_parent) == emf_bool_true, "emf_fs_create_link()")
     EMF_ASSERT_ERROR(emf_fs_is_virtual(&destination_parent) == emf_bool_true, "emf_fs_create_link()")
     EMF_ASSERT_ERROR(emf_fs_get_access_mode(&destination_parent) == emf_file_access_mode_write, "emf_fs_create_link()")
-#endif
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     emf_binding_interface->fs_create_link_fn(source, destination, type);
 }
@@ -61,11 +61,11 @@ void EMF_CALL_C emf_fs_create_directory(const emf_path_t* EMF_NOT_NULL path, con
     EMF_ASSERT_ERROR(path != nullptr, "emf_fs_create_directory()")
     EMF_ASSERT_ERROR(emf_fs_exists(path) == emf_bool_false, "emf_fs_create_directory()")
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     auto parent { emf_fs_get_parent(path) };
     EMF_ASSERT_ERROR(emf_fs_exists(&parent) == emf_bool_true, "emf_fs_create_directory()")
     EMF_ASSERT_ERROR(emf_fs_get_access_mode(&parent) == emf_file_access_mode_write, "emf_fs_create_directory()")
-#endif
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     emf_binding_interface->fs_create_directory_fn(path, options);
 }
@@ -86,12 +86,12 @@ emf_mount_id_t EMF_CALL_C emf_fs_mount_memory_file(emf_file_handler_t file_handl
     EMF_ASSERT_ERROR(file->length > 0, "emf_fs_mount_memory_file()")
     EMF_ASSERT_ERROR(emf_fs_exists(mount_point) == emf_bool_false, "emf_fs_mount_memory_file()")
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     auto mount_point_parent { emf_fs_get_parent(mount_point) };
     EMF_ASSERT_ERROR(emf_fs_exists(&mount_point_parent) == emf_bool_true, "emf_fs_mount_memory_file()")
     EMF_ASSERT_ERROR(emf_fs_is_virtual(&mount_point_parent) == emf_bool_true, "emf_fs_mount_memory_file()")
     EMF_ASSERT_ERROR(emf_fs_get_access_mode(&mount_point_parent) == emf_file_access_mode_write, "emf_fs_mount_memory_file()")
-#endif
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     return emf_binding_interface->fs_mount_memory_file_fn(file_handler, file, access_mode, mount_point, options);
 }
@@ -105,12 +105,12 @@ emf_mount_id_t EMF_CALL_C emf_fs_mount_native_path(emf_file_handler_t file_handl
     EMF_ASSERT_ERROR(emf_fs_can_mount_native_path(file_handler, path) == emf_bool_true, "emf_fs_mount_native_path()")
     EMF_ASSERT_ERROR(emf_fs_exists(mount_point) == emf_bool_false, "emf_fs_mount_native_path()")
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     auto mount_point_parent { emf_fs_get_parent(mount_point) };
     EMF_ASSERT_ERROR(emf_fs_exists(&mount_point_parent) == emf_bool_true, "emf_fs_mount_native_path()")
     EMF_ASSERT_ERROR(emf_fs_is_virtual(&mount_point_parent) == emf_bool_true, "emf_fs_mount_native_path()")
     EMF_ASSERT_ERROR(emf_fs_get_access_mode(&mount_point_parent) == emf_file_access_mode_write, "emf_fs_mount_native_path()")
-#endif
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     return emf_binding_interface->fs_mount_native_path_fn(file_handler, path, access_mode, mount_point, options);
 }
@@ -342,11 +342,11 @@ EMF_NODISCARD emf_mount_id_t EMF_CALL_C emf_fs_unsafe_create_mount_id(const emf_
     EMF_ASSERT_ERROR(mount_point != nullptr, "emf_fs_unsafe_create_mount_id()")
     EMF_ASSERT_ERROR(emf_fs_exists(mount_point) == emf_bool_false, "emf_fs_unsafe_create_mount_id()")
 
-#ifdef EMF_ENABLE_ERROR_CHECKING
+#ifdef EMF_ENABLE_DEBUG_ASSERTIONS
     auto mount_point_parent { emf_fs_get_parent(mount_point) };
     EMF_ASSERT_ERROR(emf_fs_exists(&mount_point_parent) == emf_bool_true, "emf_fs_unsafe_create_mount_id()")
     EMF_ASSERT_ERROR(emf_fs_get_access_mode(&mount_point_parent) == emf_file_access_mode_write, "emf_fs_unsafe_create_mount_id()")
-#endif
+#endif // EMF_ENABLE_DEBUG_ASSERTIONS
 
     return emf_binding_interface->fs_unsafe_create_mount_id_fn(mount_point);
 }

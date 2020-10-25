@@ -1,3 +1,9 @@
+function(set_version_script_path script_path)
+  set(EMF_VERSION_MANAGEMENT_SCRIPT
+      "${script_path}"
+      PARENT_SCOPE)
+endfunction()
+
 function(extract_version version output)
   execute_process(
     COMMAND "${Python3_EXECUTABLE}" "${EMF_VERSION_MANAGEMENT_SCRIPT}" extract

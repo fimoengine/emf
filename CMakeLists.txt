@@ -16,14 +16,13 @@ project(
   LANGUAGES C CXX)
 
 # The path to the version management script
-set(EMF_VERSION_MANAGEMENT_SCRIPT
-    "${CMAKE_SOURCE_DIR}/scripts/version_management.py")
+set_version_script_path("${CMAKE_SOURCE_DIR}/scripts/version_management.py")
 
 # Build options
 option(EMF_ENABLE_DEBUG_ASSERTIONS "Asserts the validity of preconditions" OFF)
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-  set(EMF_ENABLE_ERROR_CHECKING ON)
+  set(EMF_ENABLE_DEBUG_ASSERTIONS ON)
 endif()
 
 # Interfaces

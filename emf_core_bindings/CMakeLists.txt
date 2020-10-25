@@ -3,13 +3,16 @@ cmake_minimum_required(VERSION 3.15)
 if(${CMAKE_SOURCE_DIR} EQUAL ${CMAKE_CURRENT_SOURCE_DIR})
   find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
+  list(APPEND CMAKE_MODULE_PATH ../${CMAKE_CURRENT_SOURCE_DIR}/cmake/)
+  include(VersionHelper)
+
   if(NOT CMAKE_BUILD_TYPE)
     message(FATAL_ERROR "CMAKE_BUILD_TYPE must be set")
   endif()
 
   # The path to the version management script
-  set(EMF_VERSION_MANAGEMENT_SCRIPT
-      "../${CMAKE_SOURCE_DIR}/scripts/version_management.py")
+  set_version_script_path(
+    "../${CMAKE_SOURCE_DIR}/scripts/version_management.py")
 endif()
 
 execute_process(
