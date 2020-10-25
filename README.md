@@ -1,2 +1,2 @@
 # emf
-Documentation and C/C++ bindings for the `emf-*` interfaces.
+Documentation and specification of the `emf-*` interfaces and libraries.
