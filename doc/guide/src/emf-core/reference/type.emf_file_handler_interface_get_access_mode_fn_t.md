@@ -1,0 +1,1 @@
+# emf_file_handler_interface_get_access_mode_fn_t

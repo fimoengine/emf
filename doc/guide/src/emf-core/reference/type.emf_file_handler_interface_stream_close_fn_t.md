@@ -1,0 +1,1 @@
+# emf_file_handler_interface_stream_close_fn_t

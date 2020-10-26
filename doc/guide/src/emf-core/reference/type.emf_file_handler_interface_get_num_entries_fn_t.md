@@ -1,0 +1,1 @@
+# emf_file_handler_interface_get_num_entries_fn_t

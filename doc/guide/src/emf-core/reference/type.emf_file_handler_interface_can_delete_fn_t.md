@@ -1,0 +1,1 @@
+# emf_file_handler_interface_can_delete_fn_t

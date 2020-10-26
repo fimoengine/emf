@@ -1,0 +1,1 @@
+# emf_file_handler_interface_stream_get_pos_fn_t
