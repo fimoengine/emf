@@ -2,12 +2,12 @@
 
 ## Introduction
 
-The `FS` system specifies a customizable virtual file system, 
+The `FS` system specifies a customizable virtual file system,
 that is consistent across multiple platform.
 
-The fs is realized in two parts, a `virtual` fs-graph 
-which contains multiple `physical` fs-trees. 
-Every node contains access permissions, is reference counted and 
+The fs is realized in two parts, a `virtual` fs-graph
+which contains multiple `physical` fs-trees.
+Every node contains access permissions, is reference counted and
 is of the type `file`, `directory`, `link` or `mount point`.
 The fs can be extended with `File handlers`.
 
@@ -28,14 +28,14 @@ They can have the following types:
 The first part of the fs is the `virtual` graph. This graph can contain cycles and is not tied to a real fs.
 It consists of `directories`, `links` and `mount points`, and as such, does not contain any resource.
 
-### The `physical` tree.
+### The `physical` tree
 
 The rest of the fs is modelled as `trees`. They consist of `files` and `directories`.
 Those `trees` are tied to a physical fs and are implemented with `File handlers`.
 
 ### `File handlers`
 
-`File handlers` contain the actual logic of the fs. They implement common procedures, 
+`File handlers` contain the actual logic of the fs. They implement common procedures,
 like creating files, mounting a fs or opening streams. Those procedures can be tuned to a specifiy fs by defining custom input structures, but sane defaults are specified. A `File handler` can assume that any modification of a mounted fs occurs through it self and that any resource is contained in only one `physical` fs. Mounting a path or sub-paths multiple times and any modification of the `physical` fs which does not occur by the `File handler` that mounted the path, may result in an erroneous state.
 
 ### `Streams`

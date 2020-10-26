@@ -2,9 +2,9 @@
 
 ```c
 void emf_config_add_property_boolean(
-    const emf_config_namespace_t* group, 
-    const emf_config_property_t* property, 
-    size_t array_size, 
+    const emf_config_namespace_t* group,
+    const emf_config_property_t* property,
+    size_t array_size,
     emf_bool_t default_value
 );
 ```

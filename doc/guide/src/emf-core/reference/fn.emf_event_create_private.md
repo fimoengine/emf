@@ -8,7 +8,7 @@ emf_event_handle_t emf_event_create_private(
 
 Creates a new private event.
 
-Private events can only be accessed by the handle. 
+Private events can only be accessed by the handle.
 An empty event can be created, by passing `NULL` to `event_handler`.
 
 ## Undefined Behaviour

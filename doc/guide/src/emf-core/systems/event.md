@@ -37,7 +37,7 @@ emf_unlock();
 ## Constants
 
 - [EMF_EVENT_NAME_MAX_LENGTH](../reference/constant.EMF_EVENT_NAME_MAX_LENGTH.md)
- 
+
 ## Structs
 
 - [emf_event_handle_t](../reference/struct.emf_event_handle_t.md)

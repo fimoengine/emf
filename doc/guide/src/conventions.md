@@ -118,22 +118,22 @@ The compatibility of two differing versions `v` and `w`, with `v` <=<sub>1</sub>
 
 #### Case `v` ==<sub>1</sub> `w` && `v` <= `w`:
 
-| Version           | `w` is pre-alpha | `w` is alpha | `w` is beta | `w` is rc  | `w` is gold |
-| ----------------- | ---------------- | ------------ | ----------- | ---------- | ----------- |
-| `v` is Pre-Alpha  | No               | No           | No          | No         | No          |
-| `v` is Alpha      | No               | No           | No          | No         | No          |
-| `v` is Beta       | No               | No           | Yes         | Yes        | Yes         |
-| `v` is Rc         | No               | No           | No          | Yes        | Yes         |
-| `v` is Gold       | No               | No           | No          | No         | Yes         |
+| Version          | `w` is pre-alpha | `w` is alpha | `w` is beta | `w` is rc | `w` is gold |
+| ---------------- | ---------------- | ------------ | ----------- | --------- | ----------- |
+| `v` is Pre-Alpha | No               | No           | No          | No        | No          |
+| `v` is Alpha     | No               | No           | No          | No        | No          |
+| `v` is Beta      | No               | No           | Yes         | Yes       | Yes         |
+| `v` is Rc        | No               | No           | No          | Yes       | Yes         |
+| `v` is Gold      | No               | No           | No          | No        | Yes         |
 
 #### Else:
 
 For the versions to be compatible, bot tables must show a `Yes`.
 
-| Version           | `v.Major` != `w.Major` | `v.Minor` != `w.Minor` | `v.Patch` != `w.Patch` |
-| ----------------- | ---------------------- | ---------------------- | ---------------------- |
-| `v=0.x.y-z.i+j`   | No                     | No                     | Yes                    |
-| `v=x.y.z-i.j+k`   | No                     | Yes                    | Yes                    |
+| Version         | `v.Major` != `w.Major` | `v.Minor` != `w.Minor` | `v.Patch` != `w.Patch` |
+| --------------- | ---------------------- | ---------------------- | ---------------------- |
+| `v=0.x.y-z.i+j` | No                     | No                     | Yes                    |
+| `v=x.y.z-i.j+k` | No                     | Yes                    | Yes                    |
 
 <br>
 

@@ -9,7 +9,7 @@ emf_event_handle_t emf_event_create(
 
 Creates a new public event.
 
-Creates a new public event with the name `event_name`. 
+Creates a new public event with the name `event_name`.
 An empty event can be created, by passing `NULL` to `event_handler`.
 
 ## Naming convention

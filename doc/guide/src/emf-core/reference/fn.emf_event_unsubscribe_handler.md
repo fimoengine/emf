@@ -2,7 +2,7 @@
 
 ```c
 void emf_event_unsubscribe_handler(
-    emf_event_handle_t event_handle, 
+    emf_event_handle_t event_handle,
     emf_event_handler_fn_t event_handler
 );
 ```

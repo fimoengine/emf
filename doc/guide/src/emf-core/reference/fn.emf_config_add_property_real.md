@@ -2,9 +2,9 @@
 
 ```c
 void emf_config_add_property_real(
-    const emf_config_namespace_t* group, 
-    const emf_config_property_t* property, 
-    size_t array_size, 
+    const emf_config_namespace_t* group,
+    const emf_config_property_t* property,
+    size_t array_size,
     double default_value
 );
 ```
