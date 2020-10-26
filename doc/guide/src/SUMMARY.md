@@ -26,6 +26,7 @@
       - [EMF_EVENT_NAME_MAX_LENGTH](./emf-core/reference/constant.EMF_EVENT_NAME_MAX_LENGTH.md)
       - [EMF_FILE_HANDLER_DEFAULT_HANDLE](./emf-core/reference/constant.EMF_FILE_HANDLER_DEFAULT_HANDLE.md)
       - [EMF_FILE_TYPE_MAX_LENGTH](./emf-core/reference/constant.EMF_FILE_TYPE_MAX_LENGTH.md)
+      - [EMF_NATIVE_FILE_HANDLER_FILE_TYPE_NAME](./emf-core/reference/constant.EMF_NATIVE_FILE_HANDLER_FILE_TYPE_NAME.md)
       - [EMF_PATH_MAX](./emf-core/reference/constant.EMF_PATH_MAX.md)
     - [Enums]()
       - [emf_access_mode_t](./emf-core/reference/enum.emf_access_mode_t.md)

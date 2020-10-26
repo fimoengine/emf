@@ -14,19 +14,27 @@
 #include <emf_core/emf_macros.h>
 #include <emf_core/emf_version_t.h>
 
-#define EMF_PATH_MAX 1024 /// Max length of a path.
-#define EMF_FILE_TYPE_MAX_LENGTH 64 /// Max length of a file type.
+/// The maximum length of a path.
+#define EMF_PATH_MAX 1024
 
-#define EMF_NATIVE_FILE_HANDLER_FILE_TYPE_NAME "emf::core::native" /// Name of the native file type.
+/// The maximum length of a file type string.
+#define EMF_FILE_TYPE_MAX_LENGTH 64
+
+/// The file type understood by the default `File handler`.
+#define EMF_NATIVE_FILE_HANDLER_FILE_TYPE_NAME "emf::core::native"
 
 #ifdef __cplusplus
 #define EMF_PATH_INIT(PATH)                                                                                                      \
     emf_path_t { PATH, strlen(PATH) }
+
+/// The handle of default the `File handler`.
 #define EMF_FILE_HANDLER_DEFAULT_HANDLE                                                                                          \
     emf_file_handler_t { EMF::Core::C::emf_fs_predefined_handles_default }
 #else
 #define EMF_PATH_INIT(PATH)                                                                                                      \
     (emf_path_t) { PATH, strlen(PATH) }
+
+/// The handle of default the `File handler`.
 #define EMF_FILE_HANDLER_DEFAULT_HANDLE                                                                                          \
     (emf_file_handler_t) { emf_fs_predefined_handles_default }
 #endif // __cplusplus
@@ -126,59 +134,83 @@ typedef struct emf_entry_size_t {
     uint64_t size;
 } emf_entry_size_t;
 
-/**
- * Types of entries.
- */
+/// The possible types of a fs entry node.
+///
+/// # Variants
+///
+/// | Name                              | Value | Description         |
+/// | --------------------------------- | ----- | ------------------- |
+/// | **emf_fs_entry_type_file**        | `0`   | A file node.        |
+/// | **emf_fs_entry_type_link**        | `1`   | A link node.        |
+/// | **emf_fs_entry_type_directory**   | `2`   | A directory node.   |
+/// | **emf_fs_entry_type_mount_point** | `3`   | A mount point node. |
 typedef enum emf_fs_entry_type_t : int32_t {
-    /// File entry.
+    /// A file node.
     emf_fs_entry_type_file = 0,
-    /// Link entry.
+    /// A link node.
     emf_fs_entry_type_link = 1,
-    /// Directory entry.
+    /// A directory node.
     emf_fs_entry_type_directory = 2,
-    /// Mount point entry.
+    /// A mount point node.
     emf_fs_entry_type_mount_point = 3
 } emf_fs_entry_type_t;
 
-/**
- * Possible seek directions.
- */
+/// The starting position from which a stream can be seeked.
+///
+/// # Variants
+///
+/// | Name                         | Value | Description                                   |
+/// | ---------------------------- | ----- | --------------------------------------------- |
+/// | **emf_fs_direction_begin**   | `0`   | Seek starting at the beginning of the stream. |
+/// | **emf_fs_direction_current** | `1`   | Seek starting at the current position.        |
+/// | **emf_fs_direction_end**     | `2`   | Seek starting at the end of the stream.       |
 typedef enum emf_fs_direction_t : int32_t {
-    /// Begin.
+    /// Seek starting at the beginning of the stream.
     emf_fs_direction_begin = 0,
-    /// Current.
+    /// Seek starting at the current position.
     emf_fs_direction_current = 1,
-    /// End.
+    /// Seek starting at the end of the stream.
     emf_fs_direction_end = 2
 } emf_fs_direction_t;
 
-/**
- * Types of links.
- */
+/// The types of possible links.
+///
+/// # Variants
+///
+/// | Name                     | Value | Description               |
+/// | ------------------------ | ----- | ------------------------- |
+/// | **emf_fs_link_symlink**  | `0`   | A weak link.              |
+/// | **emf_fs_link_hardlink** | `1`   | A reference counted link. |
 typedef enum emf_fs_link_t : int32_t {
-    /// Soft link.
+    /// A weak link.
     emf_fs_link_symlink = 0,
-    /// Hard link.
+    /// A reference counted link.
     emf_fs_link_hardlink = 1
 } emf_fs_link_t;
 
-/**
- * Modes in which a file can be opened.
- */
+/// Modes in which a file can be opened.
+///
+/// # Variants
+///
+/// | Name                         | Value | Description            |
+/// | ---------------------------- | ----- | ---------------------- |
+/// | **emf_file_open_mode_begin** | `0`   | Open at the beginning. |
+/// | **emf_file_open_mode_end**   | `1`   | Open at the end.       |
 typedef enum emf_file_open_mode_t : int32_t {
-    /// Begin.
+    /// Open at the beginning.
     emf_file_open_mode_begin = 0,
-    /// End.
-    emf_file_open_mode_end = 1,
-    /// Append.
-    emf_file_open_mode_append = 2,
-    /// Truncate.
-    emf_file_open_mode_truncate = 3,
+    /// Open at the end.
+    emf_file_open_mode_end = 1
 } emf_file_open_mode_t;
 
-/**
- * Read/Write permissions.
- */
+/// Access permissions of a node.
+///
+/// # Variants
+///
+/// | Name                           | Value | Description   |
+/// | ------------------------------ | ----- | ------------- |
+/// | **emf_file_access_mode_read**  | `0`   | Read access.  |
+/// | **emf_file_access_mode_write** | `1`   | Write access. |
 typedef enum emf_access_mode_t : int32_t {
     /// Read access.
     emf_file_access_mode_read = 0,
@@ -186,12 +218,16 @@ typedef enum emf_access_mode_t : int32_t {
     emf_file_access_mode_write = 1
 } emf_access_mode_t;
 
-/**
- * Predefined handles.
- *
- * @note The handles 0-99 are reserved for the specification.
- * @note The handles 100-199 are reserved for the implementation.
- */
+/// Predefined `File handler` handles.
+///
+/// > Note: The handles `0`-`99` are reserved.
+/// > The handles `100`-`199` are implementation-defined.
+///
+/// # Variants
+///
+/// | Name                                  | Value | Description                         |
+/// | ------------------------------------- | ----- | ----------------------------------- |
+/// | **emf_fs_predefined_handles_default** | `0`   | Handle to the default file handler. |
 typedef enum emf_fs_predefined_handles_t : int32_t {
     /// Handle to the default file handler.
     emf_fs_predefined_handles_default = 0,

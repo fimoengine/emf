@@ -77,6 +77,7 @@ emf_unlock();
 
 - [EMF_FILE_HANDLER_DEFAULT_HANDLE](../reference/constant.EMF_FILE_HANDLER_DEFAULT_HANDLE.md)
 - [EMF_FILE_TYPE_MAX_LENGTH](../reference/constant.EMF_FILE_TYPE_MAX_LENGTH.md)
+- [EMF_NATIVE_FILE_HANDLER_FILE_TYPE_NAME](../reference/constant.EMF_NATIVE_FILE_HANDLER_FILE_TYPE_NAME.md)
 - [EMF_PATH_MAX](../reference/constant.EMF_PATH_MAX.md)
 
 ## Enums
