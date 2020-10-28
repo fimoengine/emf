@@ -292,7 +292,7 @@ typedef enum emf_fs_predefined_handles_t : int32_t {
 /// - **length**: `size_t`
 ///
 ///     Length of the span.
-EMF_SPAN_TYPEDEF(emf_fs_read_buffer_t, uint8_t)
+EMF_SPAN_TYPEDEF(emf_fs_buffer_t, uint8_t)
 
 /// A span of constant bytes.
 ///
@@ -437,7 +437,7 @@ EMF_FUNCTION_PTR_T(emf_file_handler_interface_stream_close, void, emf_file_handl
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_stream_flush, void, emf_file_handler_stream_t stream)
 
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_stream_read, size_t, emf_file_handler_stream_t stream,
-    emf_fs_read_buffer_t* EMF_NOT_NULL buffer, size_t read_count)
+    emf_fs_buffer_t* EMF_NOT_NULL buffer, size_t read_count)
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_stream_write, size_t, emf_file_handler_stream_t stream,
     const emf_fs_const_buffer_t* EMF_NOT_NULL buffer, size_t write_count)
 
@@ -1619,7 +1619,7 @@ void EMF_CALL_C emf_fs_stream_flush(emf_file_stream_t stream) EMF_NOEXCEPT;
  * @return Number of read bytes.
  */
 size_t EMF_CALL_C emf_fs_stream_read(
-    emf_file_stream_t stream, emf_fs_read_buffer_t* EMF_NOT_NULL buffer, size_t read_count) EMF_NOEXCEPT;
+    emf_file_stream_t stream, emf_fs_buffer_t* EMF_NOT_NULL buffer, size_t read_count) EMF_NOEXCEPT;
 
 /**
  * @brief Writes up to <code>write_count</code> number of bytes to a stream.
