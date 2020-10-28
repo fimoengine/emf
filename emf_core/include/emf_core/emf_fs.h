@@ -60,77 +60,125 @@ namespace EMF::Core::C {
  */
 typedef EMF_NATIVE_PATH_CHAR_T emf_native_path_char_t;
 
-/**
- * A path.
- */
+/// A `UTF-8` string that describes a path.
+///
+/// # Fields
+///
+/// - **data**: [`char[EMF_PATH_MAX]`](./constant.EMF_PATH_MAX.md)
+///
+///     Start of the string.
+///
+/// - **length**: `size_t`
+///
+///     Length of the string.
 EMF_FIXED_BUFFER_TYPEDEF(emf_path_t, char, EMF_PATH_MAX)
 
-/**
- * Handle to a file handler.
- */
+/// A handle to a `File handler`.
+///
+/// # Fields
+///
+/// - **id**: `int32_t`
+///
+///     File handler id.
 typedef struct emf_file_handler_t {
     /// File handler id.
     int32_t id;
 } emf_file_handler_t;
 
-/**
- * Handle to a mount point.
- */
+/// A handle to a mount point.
+///
+/// # Fields
+///
+/// - **id**: `int32_t`
+///
+///     Mount point id.
 typedef struct emf_mount_id_t {
     /// Mount point id.
     int32_t id;
 } emf_mount_id_t;
 
-/**
- * Handle to a file stream.
- */
+/// A handle to a stream.
+///
+/// # Fields
+///
+/// - **id**: `int32_t`
+///
+///     Stream id.
 typedef struct emf_file_stream_t {
     /// Stream id.
     int32_t id;
 } emf_file_stream_t;
 
-/**
- * Internal handle to a mount point.
- */
+/// An internal handle used by a `File handler` to identify a mount point.
+///
+/// # Fields
+///
+/// - **id**: `int32_t`
+///
+///     Internal id.
 typedef struct emf_file_handler_mount_id_t {
     /// Internal id.
     int32_t id;
 } emf_file_handler_mount_id_t;
 
-/**
- * Internal handle to a file stream.
- */
+/// An internal handle used by a `File handler` to identify a mount point.
+///
+/// # Fields
+///
+/// - **id**: `int32_t`
+///
+///     int32_t id;
 typedef struct emf_file_handler_stream_t {
     /// Internal id.
     int32_t id;
 } emf_file_handler_stream_t;
 
-/**
- * Type of a file.
- */
+/// A `UTF-8` string that describes the type of a file.
+///
+/// # Fields
+///
+/// - **data**: [`char[EMF_FILE_TYPE_MAX_LENGTH]`](./constant.EMF_FILE_TYPE_MAX_LENGTH.md)
+///
+///     Start of the string.
+///
+/// - **length**: `size_t`
+///
+///     Length of the string.
 EMF_FIXED_BUFFER_TYPEDEF(emf_file_type_t, char, EMF_FILE_TYPE_MAX_LENGTH)
 
-/**
- * An offset from one point in a file to an other point.
- */
+/// A stream offset.
+///
+/// # Fields
+///
+/// - **off**: `int64_t`
+///
+///     Offset.
 typedef struct emf_off_t {
     /// Offset.
     int64_t off;
 } emf_off_t;
 
-/**
- * A position in a file stream.
- */
+/// The position of a stream.
+///
+/// # Fields
+///
+/// - **pos**: `uint64_t`
+///
+///     Position.
 typedef struct emf_pos_t {
     /// Position.
     uint64_t pos;
 } emf_pos_t;
 
-/**
- * The size of an entry.
- */
+/// The memory size of an entry.
+///
+/// # Fields
+///
+/// - **size**: `uint64_t`
+///
+///     Size of the entry.
 typedef struct emf_entry_size_t {
-    /// Entry size.
+    /// Size of the entry..
     uint64_t size;
 } emf_entry_size_t;
 
@@ -233,39 +281,108 @@ typedef enum emf_fs_predefined_handles_t : int32_t {
     emf_fs_predefined_handles_default = 0,
 } emf_fs_predefined_handles_t;
 
-/**
- * A buffer of characters.
- */
-EMF_SPAN_TYPEDEF(emf_fs_read_buffer_t, char)
+/// A span of bytes.
+///
+/// # Fields
+///
+/// - **data**: `uint8_t*`
+///
+///     Start of the span.
+///
+/// - **length**: `size_t`
+///
+///     Length of the span.
+EMF_SPAN_TYPEDEF(emf_fs_read_buffer_t, uint8_t)
 
-/**
- * A buffer of characters.
- */
-EMF_SPAN_TYPEDEF(emf_fs_write_buffer_t, const char)
+/// A span of constant bytes.
+///
+/// # Fields
+///
+/// - **data**: `const uint8_t*`
+///
+///     Start of the span.
+///
+/// - **length**: `size_t`
+///
+///     Length of the span.
+EMF_SPAN_TYPEDEF(emf_fs_write_buffer_t, const uint8_t)
 
-/**
- * A memory buffer.
- */
+/// A region of memory.
+///
+/// # Fields
+///
+/// - **data**: `const void*`
+///
+///     Start of the region.
+///
+/// - **length**: `size_t`
+///
+///     Length of the region.
 EMF_SPAN_TYPEDEF(emf_memory_span_t, const void)
 
-/**
- * A span of paths.
- */
+/// A span of paths.
+///
+/// # Fields
+///
+/// - **data**: [`emf_path_t*`](./struct.emf_path_t.md)
+///
+///     Start of the span.
+///
+/// - **length**: `size_t`
+///
+///     Length of the span.
 EMF_SPAN_TYPEDEF(emf_path_span_t, emf_path_t)
 
-/**
- * A span of file types.
- */
-EMF_SPAN_TYPEDEF(emf_file_type_span_t, const emf_file_type_t)
+/// A span of file-type strings.
+///
+/// # Fields
+///
+/// - **data**: [`emf_file_type_t*`](./struct.emf_file_type_t.md)
+///
+///     Start of the span.
+///
+/// - **length**: `size_t`
+///
+///     Length of the span.
+EMF_SPAN_TYPEDEF(emf_file_type_span_t, emf_file_type_t)
 
-/**
- * A span of file handlers.
- */
+/// A span of constant file-type strings.
+///
+/// # Fields
+///
+/// - **data**: [`const emf_file_type_t*`](./struct.emf_file_type_t.md)
+///
+///     Start of the span.
+///
+/// - **length**: `size_t`
+///
+///     Length of the span.
+EMF_SPAN_TYPEDEF(emf_file_type_const_span_t, const emf_file_type_t)
+
+/// A span of `File handler` handles.
+///
+/// # Fields
+///
+/// - **data**: [`emf_file_handler_t*`](./struct.emf_file_handler_t.md)
+///
+///     The start of the span.
+///
+/// - **length**: `size_t`
+///
+///     Number of handles in the span.
 EMF_SPAN_TYPEDEF(emf_file_handler_span_t, emf_file_handler_t)
 
-/**
- * A native path in span form.
- */
+/// A native path string.
+///
+/// # Fields
+///
+/// - **data**: [`emf_native_path_char_t*`](./type.emf_native_path_char_t.md)
+///
+///     Start of the string.
+///
+/// - **length**: `size_t`
+///
+///     Length of the string.
 EMF_SPAN_TYPEDEF(emf_native_path_span_t, emf_native_path_char_t)
 
 /******************************************************************************************************
@@ -333,74 +450,204 @@ EMF_FUNCTION_PTR_T(emf_file_handler_interface_stream_can_write, EMF_NODISCARD em
 EMF_FUNCTION_PTR_T(
     emf_file_handler_interface_stream_can_grow, EMF_NODISCARD emf_bool_t, emf_file_handler_stream_t stream, size_t size)
 
+/// The interface of a `File handler`.
+///
+/// # Fields
+///
+/// - **create_file_fn**: [`emf_file_handler_interface_create_file_fn_t`](./type.emf_file_handler_interface_create_file_fn_t.md)
+///
+///     A function for creating files.
+///
+/// - **create_directory_fn**:
+/// [`emf_file_handler_interface_create_directory_fn_t`](./type.emf_file_handler_interface_create_directory_fn_t.md)
+///
+///     A function for creating directories.
+///
+/// - **delete_fn**: [`emf_file_handler_interface_delete_fn_t`](./type.emf_file_handler_interface_delete_fn_t.md)
+///
+///     A function for deleting entries.
+///
+/// - **can_delete_fn**: [`emf_file_handler_interface_can_delete_fn_t`](./type.emf_file_handler_interface_can_delete_fn_t.md)
+///
+///     A function for querying if a entry can be deleted.
+///
+/// - **can_mount_native_path_fn**:
+/// [`emf_file_handler_interface_can_mount_native_path_fn_t`](./type.emf_file_handler_interface_can_mount_native_path_fn_t.md)
+///
+///     A function for querying if a native path can be mounted.
+///
+/// - **mount_memory_file_fn**:
+/// [`emf_file_handler_interface_mount_memory_file_fn_t`](./type.emf_file_handler_interface_mount_memory_file_fn_t.md)
+///
+///     A function for mounting a memory range.
+///
+/// - **mount_native_path_fn**:
+/// [`emf_file_handler_interface_mount_native_path_fn_t`](./type.emf_file_handler_interface_mount_native_path_fn_t.md)
+///
+///     A function for mounting a path.
+///
+/// - **unmount_fn**: [`emf_file_handler_interface_unmount_fn_t`](./type.emf_file_handler_interface_unmount_fn_t.md)
+///
+///     A function for unmounting a previously mounted path/memory region.
+///
+/// - **set_access_mode_fn**:
+/// [`emf_file_handler_interface_set_access_mode_fn_t`](./type.emf_file_handler_interface_set_access_mode_fn_t.md)
+///
+///     A function for changing the access mode of a tree.
+///
+/// - **get_access_mode_fn**:
+/// [`emf_file_handler_interface_get_access_mode_fn_t`](./type.emf_file_handler_interface_get_access_mode_fn_t.md)
+///
+///     A function for getting the access mode of a node.
+///
+/// - **can_access_fn**: [`emf_file_handler_interface_can_access_fn_t`](./type.emf_file_handler_interface_can_access_fn_t.md)
+///
+///     A function for querying if a node can be accessed with a specific permission.
+///
+/// - **can_set_access_mode_fn**:
+/// [`emf_file_handler_interface_can_set_access_mode_fn_t`](./type.emf_file_handler_interface_can_set_access_mode_fn_t.md)
+///
+///     A function for querying if a access permission of a node can be set.
+///
+/// - **get_num_entries_fn**:
+/// [`emf_file_handler_interface_get_num_entries_fn_t`](./type.emf_file_handler_interface_get_num_entries_fn_t.md)
+///
+///     A function for enumerating the number of entries of a tree.
+///
+/// - **get_entries_fn**: [`emf_file_handler_interface_get_entries_fn_t`](./type.emf_file_handler_interface_get_entries_fn_t.md)
+///
+///     A function for copying the path of all entries of the tree into a buffer.
+///
+/// - **get_size_fn**: [`emf_file_handler_interface_get_size_fn_t`](./type.emf_file_handler_interface_get_size_fn_t.md)
+///
+///     A function for querying the size of an entry.
+///
+/// - **exists_fn**: [`emf_file_handler_interface_exists_fn_t`](./type.emf_file_handler_interface_exists_fn_t.md)
+///
+///     A function for querying the existance of an entry.
+///
+/// - **get_native_path_length_fn**:
+/// [`emf_file_handler_interface_get_native_path_length_fn_t`](./type.emf_file_handler_interface_get_native_path_length_fn_t.md)
+///
+///     A function for querying the length of the path represented as a native path string.
+///
+/// - **get_native_path_fn**:
+/// [`emf_file_handler_interface_get_native_path_fn_t`](./type.emf_file_handler_interface_get_native_path_fn_t.md)
+///
+///     A function for converting a path into a native path representation.
+///
+/// - **stream_open_fn**: [`emf_file_handler_interface_stream_open_fn_t`](./type.emf_file_handler_interface_stream_open_fn_t.md)
+///
+///     A function for opening a file as a stream.
+///
+/// - **stream_close_fn**:
+/// [`emf_file_handler_interface_stream_close_fn_t`](./type.emf_file_handler_interface_stream_close_fn_t.md)
+///
+///     A function for closing a stream.
+///
+/// - **stream_flush_fn**:
+/// [`emf_file_handler_interface_stream_flush_fn_t`](./type.emf_file_handler_interface_stream_flush_fn_t.md)
+///
+///     A function for flushing a stream.
+///
+/// - **stream_read_fn**: [`emf_file_handler_interface_stream_read_fn_t`](./type.emf_file_handler_interface_stream_read_fn_t.md)
+///
+///     A function for reading from a stream.
+///
+/// - **stream_write_fn**:
+/// [`emf_file_handler_interface_stream_write_fn_t`](./type.emf_file_handler_interface_stream_write_fn_t.md)
+///
+///     A function for writing to a stream.
+///
+/// - **stream_get_pos_fn**:
+/// [`emf_file_handler_interface_stream_get_pos_fn_t`](./type.emf_file_handler_interface_stream_get_pos_fn_t.md)
+///
+///     A function for getting the position of a stream.
+///
+/// - **stream_set_pos_fn**:
+/// [`emf_file_handler_interface_stream_set_pos_fn_t`](./type.emf_file_handler_interface_stream_set_pos_fn_t.md)
+///
+///     A function for setting the position of a stream.
+///
+/// - **stream_move_pos_fn**:
+/// [`emf_file_handler_interface_stream_move_pos_fn_t`](./type.emf_file_handler_interface_stream_move_pos_fn_t.md)
+///
+///     A function for moving a stream.
+///
+/// - **stream_can_write_fn**:
+/// [`emf_file_handler_interface_stream_can_write_fn_t`](./type.emf_file_handler_interface_stream_can_write_fn_t.md)
+///
+///     A function for querying if a stream has write permissions.
+///
+/// - **stream_can_grow_fn**:
+/// [`emf_file_handler_interface_stream_can_grow_fn_t`](./type.emf_file_handler_interface_stream_can_grow_fn_t.md)
+///
+///     A function for querying if a stream can write a certain amount of bytes.
 typedef struct emf_file_handler_interface_t {
-    /// Interface version.
-    emf_version_t interface_version;
-
-    /// Create file function.
+    /// A function for creating files.
     emf_file_handler_interface_create_file_fn_t EMF_NOT_NULL create_file_fn;
-    /// Create directory function.
+    /// A function for creating directories.
     emf_file_handler_interface_create_directory_fn_t EMF_NOT_NULL create_directory_fn;
 
-    /// Delete function.
+    /// A function for deleting entries.
     emf_file_handler_interface_delete_fn_t EMF_NOT_NULL delete_fn;
-    /// Can delete function.
+    /// A function for querying if a entry can be deleted.
     emf_file_handler_interface_can_delete_fn_t EMF_NOT_NULL can_delete_fn;
 
-    /// Can mount native path function.
+    /// A function for querying if a native path can be mounted.
     emf_file_handler_interface_can_mount_native_path_fn_t EMF_NOT_NULL can_mount_native_path_fn;
-    /// Mount memory file function.
+    /// A function for mounting a memory range.
     emf_file_handler_interface_mount_memory_file_fn_t EMF_NOT_NULL mount_memory_file_fn;
-    /// Mount native path function.
+    /// A function for mounting a path.
     emf_file_handler_interface_mount_native_path_fn_t EMF_NOT_NULL mount_native_path_fn;
-    /// Unmount function.
+    /// A function for unmounting a previously mounted path/memory region.
     emf_file_handler_interface_unmount_fn_t EMF_NOT_NULL unmount_fn;
 
-    /// Set access mode function.
+    /// A function for changing the access mode of a tree.
     emf_file_handler_interface_set_access_mode_fn_t EMF_NOT_NULL set_access_mode_fn;
-    /// Get access mode function.
+    /// A function for getting the access mode of a node.
     emf_file_handler_interface_get_access_mode_fn_t EMF_NOT_NULL get_access_mode_fn;
-    /// Can access function.
+    /// A function for querying if a node can be accessed with a specific permission.
     emf_file_handler_interface_can_access_fn_t EMF_NOT_NULL can_access_fn;
-    /// Can set access mode function.
+    /// A function for querying if a access permission of a node can be set.
     emf_file_handler_interface_can_set_access_mode_fn_t EMF_NOT_NULL can_set_access_mode_fn;
 
-    /// Get num entries function.
+    /// A function for enumerating the number of entries of a tree.
     emf_file_handler_interface_get_num_entries_fn_t EMF_NOT_NULL get_num_entries_fn;
-    /// Get entries function.
+    /// A function for copying the path of all entries of the tree into a buffer.
     emf_file_handler_interface_get_entries_fn_t EMF_NOT_NULL get_entries_fn;
-    /// Get size function.
+    /// A function for querying the size of an entry.
     emf_file_handler_interface_get_size_fn_t EMF_NOT_NULL get_size_fn;
-    /// Exists function.
+    /// A function for querying the existance of an entry.
     emf_file_handler_interface_exists_fn_t EMF_NOT_NULL exists_fn;
 
-    /// Get native path length function.
+    /// A function for querying the length of the path represented as a native path string.
     emf_file_handler_interface_get_native_path_length_fn_t EMF_NOT_NULL get_native_path_length_fn;
-    /// Get native path function.
+    /// A function for converting a path into a native path representation.
     emf_file_handler_interface_get_native_path_fn_t EMF_NOT_NULL get_native_path_fn;
 
-    /// Open stream function.
+    /// A function for opening a file as a stream.
     emf_file_handler_interface_stream_open_fn_t EMF_NOT_NULL stream_open_fn;
-    /// Close stream function.
+    /// A function for closing a stream.
     emf_file_handler_interface_stream_close_fn_t EMF_NOT_NULL stream_close_fn;
-    /// Flush stream function.
+    /// A function for flushing a stream.
     emf_file_handler_interface_stream_flush_fn_t EMF_NOT_NULL stream_flush_fn;
 
-    /// Read from stream function.
+    /// A function for reading from a stream.
     emf_file_handler_interface_stream_read_fn_t EMF_NOT_NULL stream_read_fn;
-    /// Write to stream function.
+    /// A function for writing to a stream.
     emf_file_handler_interface_stream_write_fn_t EMF_NOT_NULL stream_write_fn;
 
-    /// Get position of the stream function.
+    /// A function for getting the position of a stream.
     emf_file_handler_interface_stream_get_pos_fn_t EMF_NOT_NULL stream_get_pos_fn;
-    /// Set position of the stream function.
+    /// A function for setting the position of a stream.
     emf_file_handler_interface_stream_set_pos_fn_t EMF_NOT_NULL stream_set_pos_fn;
-    /// Move stream function.
+    /// A function for moving a stream.
     emf_file_handler_interface_stream_move_pos_fn_t EMF_NOT_NULL stream_move_pos_fn;
 
-    /// Can write to stream function.
+    /// A function for querying if a stream has write permissions.
     emf_file_handler_interface_stream_can_write_fn_t EMF_NOT_NULL stream_can_write_fn;
-    /// Stream can grow function.
+    /// A function for querying if a stream can write a certain amount of bytes.
     emf_file_handler_interface_stream_can_grow_fn_t EMF_NOT_NULL stream_can_grow_fn;
 } emf_file_handler_interface_t;
 
@@ -429,7 +676,7 @@ extern "C" {
  * @return A handle to the file handler.
  */
 emf_file_handler_t EMF_CALL_C emf_fs_register_file_handler(const emf_file_handler_interface_t* EMF_NOT_NULL file_handler,
-    const emf_file_type_span_t* EMF_NOT_NULL file_types) EMF_NOEXCEPT;
+    const emf_file_type_const_span_t* EMF_NOT_NULL file_types) EMF_NOEXCEPT;
 
 /**
  * @brief Removes the file handler from the system.

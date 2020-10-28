@@ -54,6 +54,7 @@
       - [emf_file_handler_stream_t](./emf-core/reference/struct.emf_file_handler_stream_t.md)
       - [emf_file_handler_t](./emf-core/reference/struct.emf_file_handler_t.md)
       - [emf_file_stream_t](./emf-core/reference/struct.emf_file_stream_t.md)
+      - [emf_file_type_const_span_t](./emf-core/reference/struct.emf_file_type_const_span_t.md)
       - [emf_file_type_span_t](./emf-core/reference/struct.emf_file_type_span_t.md)
       - [emf_file_type_t](./emf-core/reference/struct.emf_file_type_t.md)
       - [emf_fs_read_buffer_t](./emf-core/reference/struct.emf_fs_read_buffer_t.md)

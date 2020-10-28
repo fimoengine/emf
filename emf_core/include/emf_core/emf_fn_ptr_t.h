@@ -96,7 +96,7 @@ EMF_FUNCTION_PTR_T(emf_event_signal, void, emf_event_handle_t event_handle, emf_
 ******************************************************************************************************/
 
 EMF_FUNCTION_PTR_T(emf_fs_register_file_handler, emf_file_handler_t,
-    const emf_file_handler_interface_t* EMF_NOT_NULL file_handler, const emf_file_type_span_t* EMF_NOT_NULL file_types)
+    const emf_file_handler_interface_t* EMF_NOT_NULL file_handler, const emf_file_type_const_span_t* EMF_NOT_NULL file_types)
 EMF_FUNCTION_PTR_T(emf_fs_remove_file_handler, void, emf_file_handler_t file_handler)
 EMF_FUNCTION_PTR_T(emf_fs_create_file, void, const emf_path_t* EMF_NOT_NULL filename, const void* EMF_MAYBE_NULL options)
 EMF_FUNCTION_PTR_T(emf_fs_create_link, void, const emf_path_t* EMF_NOT_NULL source, const emf_path_t* EMF_NOT_NULL destination,
