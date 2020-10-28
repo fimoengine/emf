@@ -105,7 +105,7 @@ emf_unlock();
 - [emf_fs_write_buffer_t](../reference/struct.emf_fs_write_buffer_t.md)
 - [emf_memory_span_t](../reference/struct.emf_memory_span_t.md)
 - [emf_mount_id_t](../reference/struct.emf_mount_id_t.md)
-- [emf_native_path_span_t](../reference/struct.emf_native_path_span_t.md)
+- [emf_native_path_string_t](../reference/struct.emf_native_path_string_t.md)
 - [emf_off_t](../reference/struct.emf_off_t.md)
 - [emf_path_span_t](../reference/struct.emf_path_span_t.md)
 - [emf_path_t](../reference/struct.emf_path_t.md)

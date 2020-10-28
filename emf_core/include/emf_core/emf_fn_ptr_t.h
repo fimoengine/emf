@@ -135,7 +135,7 @@ EMF_FUNCTION_PTR_T(emf_fs_get_link_type, EMF_NODISCARD emf_fs_link_t, const emf_
 EMF_FUNCTION_PTR_T(emf_fs_get_size, EMF_NODISCARD emf_entry_size_t, const emf_path_t* EMF_NOT_NULL path)
 EMF_FUNCTION_PTR_T(emf_fs_get_native_path_length, EMF_NODISCARD size_t, const emf_path_t* EMF_NOT_NULL path)
 EMF_FUNCTION_PTR_T(
-    emf_fs_get_native_path, size_t, const emf_path_t* EMF_NOT_NULL path, emf_native_path_span_t* EMF_NOT_NULL buffer)
+    emf_fs_get_native_path, size_t, const emf_path_t* EMF_NOT_NULL path, emf_native_path_string_t* EMF_NOT_NULL buffer)
 EMF_FUNCTION_PTR_T(emf_fs_get_num_file_handlers, EMF_NODISCARD size_t, void)
 EMF_FUNCTION_PTR_T(emf_fs_get_file_handlers, size_t, emf_file_handler_span_t* EMF_NOT_NULL buffer)
 EMF_FUNCTION_PTR_T(emf_fs_get_file_handler_from_type, EMF_NODISCARD emf_file_handler_t, const emf_file_type_t* EMF_NOT_NULL type)

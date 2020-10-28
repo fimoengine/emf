@@ -1,10 +1,10 @@
-# Struct `emf_native_path_span_t`
+# Struct `emf_native_path_string_t`
 
 ```c
-typedef struct emf_native_path_span_t {
+typedef struct emf_native_path_string_t {
     emf_native_path_char_t* data;
     size_t length;
-} emf_native_path_span_t;
+} emf_native_path_string_t;
 ```
 
 A native path string.

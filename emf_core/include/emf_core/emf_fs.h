@@ -383,7 +383,7 @@ EMF_SPAN_TYPEDEF(emf_file_handler_span_t, emf_file_handler_t)
 /// - **length**: `size_t`
 ///
 ///     Length of the string.
-EMF_SPAN_TYPEDEF(emf_native_path_span_t, emf_native_path_char_t)
+EMF_SPAN_TYPEDEF(emf_native_path_string_t, emf_native_path_char_t)
 
 /******************************************************************************************************
 *********************************************  Interface  *********************************************
@@ -428,7 +428,7 @@ EMF_FUNCTION_PTR_T(emf_file_handler_interface_exists, EMF_NODISCARD emf_bool_t, 
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_native_path_length, EMF_NODISCARD size_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path)
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_native_path, size_t, emf_file_handler_mount_id_t mount_id,
-    const emf_path_t* EMF_NOT_NULL path, emf_native_path_span_t* EMF_NOT_NULL buffer)
+    const emf_path_t* EMF_NOT_NULL path, emf_native_path_string_t* EMF_NOT_NULL buffer)
 
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_stream_open, EMF_NODISCARD emf_file_handler_stream_t,
     emf_file_handler_mount_id_t mount_id, const emf_path_t* EMF_NOT_NULL path, emf_file_open_mode_t open_mode,
@@ -1186,7 +1186,7 @@ EMF_NODISCARD size_t EMF_CALL_C emf_fs_get_native_path_length(const emf_path_t* 
  * @return Number of written bytes.
  */
 size_t EMF_CALL_C emf_fs_get_native_path(
-    const emf_path_t* EMF_NOT_NULL path, emf_native_path_span_t* EMF_NOT_NULL buffer) EMF_NOEXCEPT;
+    const emf_path_t* EMF_NOT_NULL path, emf_native_path_string_t* EMF_NOT_NULL buffer) EMF_NOEXCEPT;
 
 /**
  * @brief Returns the number of file handlers.
