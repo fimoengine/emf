@@ -1,10 +1,10 @@
-# Struct `emf_fs_write_buffer_t`
+# Struct `emf_fs_const_buffer_t`
 
 ```c
-typedef struct emf_fs_write_buffer_t {
+typedef struct emf_fs_const_buffer_t {
     const uint8_t* data;
     size_t length;
-} emf_fs_write_buffer_t;
+} emf_fs_const_buffer_t;
 ```
 
 A span of constant bytes.
