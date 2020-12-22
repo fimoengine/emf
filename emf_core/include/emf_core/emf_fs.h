@@ -49,9 +49,13 @@ namespace EMF::Core::C {
 
 #ifdef _WIN32
 #define EMF_NATIVE_PATH(TEXT) L##TEXT
+
+/// The character type used by the system to represent paths.
 #define EMF_NATIVE_PATH_CHAR_T wchar_t
 #else
 #define EMF_NATIVE_PATH(TEXT) TEXT
+
+/// The character type used by the system to represent paths.
 #define EMF_NATIVE_PATH_CHAR_T char
 #endif // _WIN32
 
@@ -389,18 +393,52 @@ EMF_SPAN_TYPEDEF(emf_native_path_string_t, emf_native_path_char_t)
 *********************************************  Interface  *********************************************
 ******************************************************************************************************/
 
+/// Creates a new file.
+///
+/// Creates a new file at the specified path.
+/// The file can be created if no other entry exists at the same path.
+/// A pointer to an implementation-defined structure, which controlls how the file is created, can be passed.
+/// If no pointer is supplied, the default options will be used.
+/// By default, an empty file with write permissions will be created.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_create_file, void, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, const void* EMF_MAYBE_NULL options)
+
+/// Creates a new directory.
+///
+/// Creates a new directory at the specified path.
+/// The directory can be created if no other entry exists at the same path.
+/// A pointer to an implementation-defined structure, which controlls how the directory is created, can be passed.
+/// If no pointer is supplied, the default options will be used.
+/// By default, an empty directory with write permissions will be created.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_create_directory, void, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, const void* EMF_MAYBE_NULL options)
 
+/// Deletes a path.
+///
+/// It is undefined behaviour to delete a path that can not be deleted.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_delete, void, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_bool_t recursive)
+
+/// Queries if a path can be deleted.
+///
+/// A path can be deleted if no open files are contained within it.
+/// A non empty directory can only be deleted if `recursive` is set to `emf_bool_true`.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_can_delete, EMF_NODISCARD emf_bool_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_bool_t recursive)
 
+/// Queries if a path can be mounted by the `File handler`.
 EMF_FUNCTION_PTR_T(
     emf_file_handler_interface_can_mount_native_path, EMF_NODISCARD emf_bool_t, const emf_native_path_char_t* EMF_NOT_NULL path)
+
+/// Mounts a region of memory.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_mount_memory_file, EMF_NODISCARD emf_file_handler_mount_id_t,
     const emf_memory_span_t* EMF_NOT_NULL file, emf_access_mode_t access_mode, const void* EMF_MAYBE_NULL options)
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_mount_native_path, EMF_NODISCARD emf_file_handler_mount_id_t,
@@ -409,24 +447,75 @@ EMF_FUNCTION_PTR_T(emf_file_handler_interface_unmount, void, emf_file_handler_mo
 
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_set_access_mode, void, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_access_mode_t access_mode, emf_bool_t recursive)
+
+/// Queries the permissions of a path.
+///
+/// It is undefined bahaviour to supply a path that does not exist.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_access_mode, EMF_NODISCARD emf_access_mode_t,
     emf_file_handler_mount_id_t mount_id, const emf_path_t* EMF_NOT_NULL path)
+
+/// Queries if the path can be accessed with the provided `access_mode`.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_can_access, EMF_NODISCARD emf_bool_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_access_mode_t access_mode)
+
+/// Queries if the permissions of a path can be changed.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_can_set_access_mode, EMF_NODISCARD emf_bool_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_access_mode_t access_mode, emf_bool_t recursive)
 
+/// Enumerates the entries within and including the path.
+///
+/// It is undefined behaviour to supply an invalid `path`.
+/// The entries can be enumerated recursively by setting `recursive` to `emf_bool_true`.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_num_entries, EMF_NODISCARD size_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_bool_t recursive)
+
+/// Fetches the paths of all entries contained inside and including `path`.
+///
+/// Returns the number of entries it fetched and copies their paths inside `buffer`.
+/// It is undefined bahaviour to supply a path that does not exist.
+/// The `File handler` can assume, that `buffer` is valid and big enough.
+///
+/// > Note: The `path` and the path of the entries are relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_entries, size_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_bool_t recursive, emf_path_span_t* EMF_NOT_NULL buffer)
+
+/// Queries the size of an entry.
+///
+/// It is undefined behaviour to supply an invalid `path`.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_size, EMF_NODISCARD emf_entry_size_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path)
+
+/// Checks if a path exists.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_exists, EMF_NODISCARD emf_bool_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path)
 
+/// Computes the length of a native path.
+///
+/// It is undefined behaviour to supply an invalid `path`.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_native_path_length, EMF_NODISCARD size_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path)
+
+/// Converts the virtual path into a native path.
+///
+/// Converts `path` into a native resource identifier.
+/// It is undefined behaviour to supply an invalid path or a
+/// buffer that is not big enough to contain the path.
+///
+/// > Note: The `path` is relative to the mounted path.
 EMF_FUNCTION_PTR_T(emf_file_handler_interface_get_native_path, size_t, emf_file_handler_mount_id_t mount_id,
     const emf_path_t* EMF_NOT_NULL path, emf_native_path_string_t* EMF_NOT_NULL buffer)
 
