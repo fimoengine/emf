@@ -45,12 +45,13 @@ else()
 endif()
 
 monitor_version(
+  emf_core_replace_version.ini
   ${PROJECT_SOURCE_DIR}/include/emf_core/version.h.in
   ${CMAKE_CURRENT_BINARY_DIR}/include/emf_core/version.h
   ${PROJECT_SOURCE_DIR}/version.json --prefix EMF_CORE_)
 
 add_library(emf_core INTERFACE)
-add_dependencies(emf_core include/emf_core/version.h)
+add_dependencies(emf_core emf_core_replace_version.ini)
 target_include_directories(
   emf_core
   INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>

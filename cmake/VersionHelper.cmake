@@ -7,7 +7,7 @@ endfunction()
 function(extract_version version output)
   execute_process(
     COMMAND "${Python3_EXECUTABLE}" "${EMF_VERSION_MANAGEMENT_SCRIPT}" extract
-            "${CMAKE_CURRENT_SOURCE_DIR}/version.json" -
+            "${version}" -
     OUTPUT_VARIABLE version_tmp
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 
@@ -28,7 +28,7 @@ function(replace_version input output version)
             "${input}" "${output}" "${version}" ${ARGN})
 endfunction()
 
-function(monitor_version input output version)
+function(monitor_version target input output version)
   replace_version(${input} ${output} ${version} ${ARGN})
 
   add_custom_command(
@@ -36,4 +36,6 @@ function(monitor_version input output version)
     COMMAND "${Python3_EXECUTABLE}" "${EMF_VERSION_MANAGEMENT_SCRIPT}" replace
             "${input}" "${output}" "${version}" ${ARGN}
     DEPENDS "${input}")
+
+  add_custom_target(${target} DEPENDS "${output}")
 endfunction()
