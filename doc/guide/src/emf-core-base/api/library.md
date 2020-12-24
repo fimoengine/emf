@@ -23,7 +23,9 @@ Some `library loaders` are always present and can not be removed at runtime.
 ### Native
 
 The native `library loader` is able to load platform-specific libraries (e.g. dlopen()/LoadLibrary()).
-It is associated to the [`EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME`](../reference/constant.EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME.md) `library type` and is reachable with the [`EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE`](../reference/constant.EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE.md) handle.
+It is associated to the [`EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME`](../reference/constant.EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME.md) `library type` and is reachable with the [`EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE`](../reference/constant.EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE.md) handle. Libraries with the same absolute path are loaded only once and subsequent load calls increase their reference count.
+
+On posix the `library loader` defaults to the `RTLD_LAZY` and `RTLD_LOCAL` flags. More controll of how to load a library can be achieved by fetching a pointer to the interface with [`emf_cbase_library_unsafe_get_loader_interface`](../reference/fn.emf_cbase_library_unsafe_get_loader_interface.md), casting it to a [`emf_cbase_native_library_loader_interface_t`](../reference/struct.emf_cbase_native_library_loader_interface_t.md) and calling the [`load_ext_fn`](../reference/type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md) function.
 
 ## Example
 
@@ -86,6 +88,7 @@ if (error_opt.has_value) {
 - [`emf_cbase_library_size_result_t`](../reference/struct.emf_cbase_library_size_result_t.md)
 - [`emf_cbase_library_type_span_t`](../reference/struct.emf_cbase_library_type_span_t.md)
 - [`emf_cbase_library_type_t`](../reference/struct.emf_cbase_library_type_t.md)
+- [`emf_cbase_native_library_loader_interface_t`](../reference/struct.emf_cbase_native_library_loader_interface_t.md)
 
 ## Type definitions
 
@@ -94,6 +97,7 @@ if (error_opt.has_value) {
 - [`emf_cbase_library_loader_interface_get_function_symbol_fn_t`](../reference/type.emf_cbase_library_loader_interface_get_function_symbol_fn_t.md)
 - [`emf_cbase_library_loader_interface_load_fn_t`](../reference/type.emf_cbase_library_loader_interface_load_fn_t.md)
 - [`emf_cbase_library_loader_interface_unload_fn_t`](../reference/type.emf_cbase_library_loader_interface_unload.md)
+- [`emf_cbase_native_library_loader_interface_load_ext_fn_t`](../reference/type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md)
 - [`emf_cbase_os_path_char_t`](../reference/type.emf_cbase_os_path_char_t.md)
 
 ## Functions

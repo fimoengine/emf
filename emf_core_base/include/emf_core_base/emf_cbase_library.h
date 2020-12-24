@@ -460,6 +460,46 @@ typedef struct emf_cbase_library_loader_interface_t {
 EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_loader_interface_result_t,
     const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL, emf_cbase_library_error_t)
 
+/**************************************  Native Library Loader **************************************/
+
+#if defined(Win32) || defined(_WIN32)
+/// A function pointer to a `load_ext` function.
+///
+/// The function loads the library, which is located at `library_path`, and returns its handle.
+/// Directly matches the win32 `LoadLibraryExW` function.
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext,
+    EMF_CBASE_NODISCARD emf_cbase_library_loader_library_handle_result_t,
+    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
+    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path, void* EMF_CBASE_MAYBE_NULL hFile, uint32_t flags)
+#else
+/// A function pointer to a `load_ext` function.
+///
+/// The function loads the library, which is located at `library_path`, and returns its handle.
+/// Directly matches the posix `dlopen` function.
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext,
+    EMF_CBASE_NODISCARD emf_cbase_library_loader_library_handle_result_t,
+    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
+    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path, int flags)
+#endif // defined(Win32) || defined(_WIN32)
+
+/// Interface of a native library loader.
+///
+/// # Fields
+///
+/// - **library_loader_interface**: [`emf_cbase_library_loader_interface_t`](./struct.emf_cbase_library_loader_interface_t.md)
+///
+///     The base library loader interface.
+///
+/// - **load_ext_fn**:
+/// [`emf_cbase_native_library_loader_interface_load_ext_fn_t`](./type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md)
+///
+///     The load_ext function of the module loader.
+///     May not be `NULL`.
+typedef struct emf_cbase_native_library_loader_interface_t {
+    emf_cbase_library_loader_interface_t library_loader_interface;
+    emf_cbase_native_library_loader_interface_load_ext_fn_t EMF_CBASE_NOT_NULL load_ext_fn;
+} emf_cbase_native_library_loader_interface_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
