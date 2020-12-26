@@ -28,6 +28,14 @@
 ///! `library type` and is reachable with the
 ///! [`EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE`](./constant.EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE.md) handle.
 ///!
+///! On posix the `library loader` defaults to the `RTLD_LAZY` and `RTLD_LOCAL` flags. More controll of how to load a library can
+///! be achieved by fetching a pointer to the interface with
+///! [`emf_cbase_library_unsafe_get_loader_interface`](./fn.emf_cbase_library_unsafe_get_loader_interface.md), casting it to a
+///! [`emf_cbase_native_library_loader_interface_t`](./struct.emf_cbase_native_library_loader_interface_t.md) and calling the
+///! [`load_ext_fn`](.type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md) function.
+///! If the library has dependencies on other libraries, then it must specify them by specifying an `rpath` on posix or
+///! embedding an `Activation Context manifest` into the library on Windows.
+///!
 ///! # Example
 ///!
 ///! ```c
