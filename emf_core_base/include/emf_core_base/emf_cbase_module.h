@@ -619,6 +619,14 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_load_dependencies
     EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
 
+/// A function pointer to a `get_module_path` function.
+///
+/// This function fetches the path a module was loaded from.
+/// The function must be thread-safe.
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path,
+    EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL,
+    emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
+
 /// Interface of a module loader.
 ///
 /// # Fields
@@ -696,6 +704,12 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_load_dependencies
 ///
 ///     The get_load_dependencies function of the module loader.
 ///     May not be `NULL`.
+///
+/// - **get_module_path_fn**:
+/// [`emf_cbase_module_loader_interface_get_module_path_fn_t`](./type.emf_cbase_module_loader_interface_get_module_path_fn_t.md)
+///
+///     The get_module_path function of the module loader.
+///     May not be `NULL`.
 typedef struct emf_cbase_module_loader_interface_t {
     /// Module loader.
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader;
@@ -723,6 +737,8 @@ typedef struct emf_cbase_module_loader_interface_t {
     emf_cbase_module_loader_interface_get_interface_fn_t EMF_CBASE_NOT_NULL get_interface_fn;
     /// Get load dependencies function.
     emf_cbase_module_loader_interface_get_load_dependencies_fn_t EMF_CBASE_NOT_NULL get_load_dependencies_fn;
+    /// Get module path function.
+    emf_cbase_module_loader_interface_get_module_path_fn_t EMF_CBASE_NOT_NULL get_module_path_fn;
 } emf_cbase_module_loader_interface_t;
 
 /// A struct containing either an `const emf_cbase_module_loader_interface_t*` or an `emf_cbase_module_error_t`
@@ -1470,6 +1486,18 @@ EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_
 EMF_CBASE_NODISCARD emf_cbase_module_interface_result_t EMF_CBASE_CALL_C emf_cbase_module_get_interface(
     emf_cbase_module_handle_t module_handle,
     const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT;
+
+/// Fetches the path a module was loaded from.
+///
+/// # Failure
+///
+/// The function fails if `module_handle` is invalid or the module is not yet loaded.
+///
+/// # Undefined Behaviour
+///
+/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL emf_cbase_module_get_module_path(
+    emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
 #ifdef __cplusplus
 }

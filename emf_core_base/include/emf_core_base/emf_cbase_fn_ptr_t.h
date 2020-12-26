@@ -368,6 +368,10 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_interface, EMF_CBASE_NODISCARD emf
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle,
     const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
 
+/// Function pointer to the `emf_cbase_module_get_module_path` function.
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_path, EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL,
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus

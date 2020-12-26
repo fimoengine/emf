@@ -94,6 +94,7 @@ typedef struct emf_cbase_interface_t {
     emf_cbase_module_get_exportable_interfaces_fn_t EMF_CBASE_NOT_NULL module_get_exportable_interfaces_fn;
     emf_cbase_module_get_runtime_dependencies_fn_t EMF_CBASE_NOT_NULL module_get_runtime_dependencies_fn;
     emf_cbase_module_get_interface_fn_t EMF_CBASE_NOT_NULL module_get_interface_fn;
+    emf_cbase_module_get_module_path_fn_t EMF_CBASE_NOT_NULL module_get_module_path_fn;
 } emf_core_interface_t;
 
 #ifdef __cplusplus

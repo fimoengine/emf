@@ -235,4 +235,10 @@ EMF_CBASE_NODISCARD emf_cbase_module_interface_result_t EMF_CBASE_CALL_C emf_cba
 }
 }
 
+EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL emf_cbase_module_get_module_path(
+    emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT
+{
+    return emf_cbase_binding_interface->module_get_module_path_fn(emf_cbase_binding_interface->cbase, module_handle);
+}
+
 }
