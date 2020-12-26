@@ -34,6 +34,8 @@ If the library has dependencies on other libraries, then it must specify them by
 ```c
 const emf_cbase_os_path_char_t* library_path = "./example_lib.so";
 
+emf_cbase_sys_lock();
+
 emf_cbase_library_handle_result_t library_handle_res = 
     emf_cbase_library_load(EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME, library_path);
 if (library_handle_res.has_error) {
@@ -57,6 +59,8 @@ emf_cbase_library_error_optional_t error_opt =
 if (error_opt.has_value) {
     emf_cbase_sys_panic("Unable to unload the `./example_lib.so` library.");
 }
+
+emf_cbase_sys_unlock();
 ```
 
 ## Constants

@@ -18,12 +18,16 @@ emf_cbase_version_result_t v2_res = emf_cbase_version_construct_from_string(
     &v2_string_buff
 );
 if (v2_res.has_error) {
+    emf_cbase_sys_lock();
     emf_cbase_sys_panic("Could not construct version from string.");
+    emf_cbase_sys_unlock()
 }
 emf_cbase_version_t v2 = v2_res.result;
 
 if (emf_cbase_version_compare_weak(&v1, &v2) != 0) {
+    emf_cbase_sys_lock();
     emf_cbase_sys_panic("Should not happen.");
+    emf_cbase_sys_unlock();
 }
 ```
 
