@@ -15,7 +15,7 @@ namespace EMF::CoreBase::C {
 
 /// An enum describing a boolean value.
 ///
-/// ## Variants
+/// # Variants
 ///
 /// | Name                     | Value | Description  |
 /// | ------------------------ | ----- | ------------ |
