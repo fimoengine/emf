@@ -7,7 +7,7 @@ typedef struct emf_cbase_native_library_loader_interface_t {
 } emf_cbase_native_library_loader_interface_t
 ```
 
-Interface of a native library loader.
+Interface of the native library loader.
 
 ## Fields
 

@@ -147,7 +147,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_mo
     return emf_cbase_binding_interface->module_remove_module_fn(emf_cbase_binding_interface->cbase, module_handle);
 }
 
-EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t emf_cbase_module_get_load_dependencies(
+EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t emf_cbase_module_get_load_dependencies(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT
 {
     return emf_cbase_binding_interface->module_get_load_dependencies_fn(emf_cbase_binding_interface->cbase, module_handle);
@@ -160,7 +160,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_status_result_t emf_cbase_module_fetch_stat
 }
 
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_add_dependency(emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT
 {
     EMF_CBASE_ASSERT_ERROR(interface_descriptor != nullptr, "emf_cbase_module_add_dependency()")
     return emf_cbase_binding_interface->module_add_dependency_fn(
@@ -168,7 +168,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_add_depen
 }
 
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_dependency(emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT
 {
     EMF_CBASE_ASSERT_ERROR(interface_descriptor != nullptr, "emf_cbase_module_remove_dependency()")
     return emf_cbase_binding_interface->module_remove_dependency_fn(
@@ -176,7 +176,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_de
 }
 
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_export_interface(
-    emf_cbase_module_handle_t module_handle, emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
+    emf_cbase_module_handle_t module_handle, const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
 {
     EMF_CBASE_ASSERT_ERROR(interface_descriptor != nullptr, "emf_cbase_module_export_interface()")
     return emf_cbase_binding_interface->module_export_interface_fn(
@@ -213,13 +213,13 @@ EMF_CBASE_NODISCARD emf_cbase_module_info_ptr_result_t EMF_CBASE_CALL_C emf_cbas
     return emf_cbase_binding_interface->module_get_module_info_fn(emf_cbase_binding_interface->cbase, module_handle);
 }
 
-EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_C emf_cbase_module_get_exportable_interfaces(
-    emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT
+EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t EMF_CBASE_CALL_C
+emf_cbase_module_get_exportable_interfaces(emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT
 {
     return emf_cbase_binding_interface->module_get_exportable_interfaces_fn(emf_cbase_binding_interface->cbase, module_handle);
 }
 
-EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_C emf_cbase_module_get_runtime_dependencies(
+EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t EMF_CBASE_CALL_C emf_cbase_module_get_runtime_dependencies(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT
 {
     return emf_cbase_binding_interface->module_get_runtime_dependencies_fn(emf_cbase_binding_interface->cbase, module_handle);
@@ -235,7 +235,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_interface_result_t EMF_CBASE_CALL_C emf_cba
 }
 }
 
-EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL emf_cbase_module_get_module_path(
+EMF_CBASE_NODISCARD emf_cbase_os_path_char_result_t emf_cbase_module_get_module_path(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT
 {
     return emf_cbase_binding_interface->module_get_module_path_fn(emf_cbase_binding_interface->cbase, module_handle);

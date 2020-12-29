@@ -311,8 +311,9 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_remove_module, EMF_CBASE_NODISCARD emf
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
 
 /// Function pointer to the `emf_cbase_module_get_load_dependencies` function.
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_load_dependencies, EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_load_dependencies,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
+    emf_cbase_module_handle_t module_handle)
 
 /// Function pointer to the `emf_cbase_module_fetch_status` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_fetch_status, EMF_CBASE_NODISCARD emf_cbase_module_status_result_t,
@@ -321,17 +322,17 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_fetch_status, EMF_CBASE_NODISCARD emf_
 /// Function pointer to the `emf_cbase_module_add_dependency` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_add_dependency, EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
 
 /// Function pointer to the `emf_cbase_module_remove_dependency` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_remove_dependency, EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
 
 /// Function pointer to the `emf_cbase_module_export_interface` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_export_interface, EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
 
 /// Function pointer to the `emf_cbase_module_load` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_load, EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t,
@@ -355,12 +356,12 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_info, EMF_CBASE_NODISCARD e
 
 /// Function pointer to the `emf_cbase_module_get_exportable_interfaces` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_exportable_interfaces,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
     emf_cbase_module_handle_t module_handle)
 
 /// Function pointer to the `emf_cbase_module_get_runtime_dependencies` function.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_runtime_dependencies,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
     emf_cbase_module_handle_t module_handle)
 
 /// Function pointer to the `emf_cbase_module_get_interface` function.
@@ -369,7 +370,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_interface, EMF_CBASE_NODISCARD emf
     const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor)
 
 /// Function pointer to the `emf_cbase_module_get_module_path` function.
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_path, EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL,
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_path, emf_cbase_os_path_char_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
 
 #ifdef __cplusplus

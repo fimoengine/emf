@@ -24,7 +24,7 @@
 //!
 //! A `module` is a simple directory containing all the required resources.
 //! The internal structure of the `module` is defined by the respective `module loader`.
-//! The only requirement is the existance of the `module.json` file at the root of the module.
+//! The only requirement is the existence of the `module.json` file at the root of the module.
 //! This file is the `module manifest` and specifies that the directory is indeed a module.
 //!
 //! # Module manifest
@@ -187,7 +187,7 @@
 #define EMF_CBASE_INTERFACE_EXTENSION_NAME_MAX_LENGTH 32
 
 /// Max length of a module type name.
-#define EMF_CBASE_MODULE_LOADER_TYPE_MAX_LENGTH 64 /// Module type name max length.
+#define EMF_CBASE_MODULE_LOADER_TYPE_MAX_LENGTH 64
 
 /// Name of the native module type.
 #define EMF_CBASE_NATIVE_MODULE_TYPE_NAME "emf::core_base::native"
@@ -249,7 +249,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_get_function, EMF_CBASE_NODISCARD emf_cba
 /// | **emf_cbase_module_status_unloaded**   | `0`   | The module has not been loaded.  |
 /// | **emf_cbase_module_status_terminated** | `1`   | The module has been loaded.      |
 /// | **emf_cbase_module_status_ready**      | `2`   | The module has been initialized. |
-typedef enum emf_cbase_module_status_t {
+typedef enum emf_cbase_module_status_t : int32_t {
     emf_cbase_module_status_unloaded = 0,
     emf_cbase_module_status_terminated = 1,
     emf_cbase_module_status_ready = 2,
@@ -417,14 +417,14 @@ typedef enum emf_cbase_module_predefined_handles_t : int32_t {
 ///
 /// # Fields
 ///
-/// - **data**: [`const emf_cbase_module_info_t*`](./struct.emf_cbase_module_info_t.md)
+/// - **data**: [`emf_cbase_module_info_t*`](./struct.emf_cbase_module_info_t.md)
 ///
 ///     The start of the span.
 ///
 /// - **length**: `size_t`
 ///
 ///     The length of the span.
-EMF_CBASE_SPAN_TYPEDEF(emf_cbase_module_info_span_t, const emf_cbase_module_info_t)
+EMF_CBASE_SPAN_TYPEDEF(emf_cbase_module_info_span_t, emf_cbase_module_info_t)
 
 /// A span of interface extensions.
 ///
@@ -522,7 +522,20 @@ typedef enum emf_cbase_module_error_t : int32_t {
 /// - **length**: `size_t`
 ///
 ///     The length of the span.
-EMF_CBASE_SPAN_TYPEDEF(emf_cbase_interface_descriptor_span_t, const emf_cbase_interface_descriptor_t)
+EMF_CBASE_SPAN_TYPEDEF(emf_cbase_interface_descriptor_span_t, emf_cbase_interface_descriptor_t)
+
+/// A span of constant interface descriptors.
+///
+/// # Fields
+///
+/// - **data**: [`const emf_cbase_interface_descriptor_t*`](./struct.emf_cbase_interface_descriptor_t.md)
+///
+///     The start of the span.
+///
+/// - **length**: `size_t`
+///
+///     The length of the span.
+EMF_CBASE_SPAN_TYPEDEF(emf_cbase_interface_descriptor_const_span_t, const emf_cbase_interface_descriptor_t)
 
 /// An optional `emf_cbase_module_error_t` value
 ///
@@ -606,11 +619,11 @@ EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_status_result_t, emf_cbase_module_stat
 EMF_CBASE_RESULT_TYPEDEF(
     emf_cbase_module_loader_module_handle_result_t, emf_cbase_module_loader_module_handle_t, emf_cbase_module_error_t)
 
-/// A struct containing either an `emf_cbase_interface_descriptor_span_t` or an `emf_cbase_module_error_t`
+/// A struct containing either an `emf_cbase_interface_descriptor_const_span_t` or an `emf_cbase_module_error_t`
 ///
 /// # Fields
 ///
-/// - **result**: [`emf_cbase_interface_descriptor_span_t`](./struct.emf_cbase_interface_descriptor_span_t.md)
+/// - **result**: [`emf_cbase_interface_descriptor_const_span_t`](./struct.emf_cbase_interface_descriptor_const_span_t.md)
 ///
 ///     The span of interface descriptors.
 ///
@@ -622,7 +635,7 @@ EMF_CBASE_RESULT_TYPEDEF(
 ///
 ///     A boolean indicating if the result contains an error.
 EMF_CBASE_RESULT_TYPEDEF(
-    emf_cbase_interface_descriptor_span_result_t, emf_cbase_interface_descriptor_span_t, emf_cbase_module_error_t)
+    emf_cbase_interface_descriptor_const_span_result_t, emf_cbase_interface_descriptor_const_span_t, emf_cbase_module_error_t)
 
 /// A struct containing either an `const emf_cbase_module_info_t*` or an `emf_cbase_module_error_t`
 ///
@@ -676,6 +689,24 @@ EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_loader_handle_result_t, emf_cbase_modu
 ///
 ///     A boolean indicating if the result contains an error.
 EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_size_result_t, size_t, emf_cbase_module_error_t)
+
+/// A struct containing either a `const emf_cbase_os_path_char_t*` or an `emf_cbase_module_error_t`
+///
+/// # Fields
+///
+/// - **result**: [`const emf_cbase_os_path_char_t*`](./type.emf_cbase_os_path_char_t.md)
+///
+///     The handle of the loader.
+///
+/// - **error**: [`emf_cbase_module_error_t`](./enum.emf_cbase_module_error_t.md)
+///
+///     The error.
+///
+/// - **has_error**: [`emf_cbase_bool_t`](./enum.emf_cbase_bool_t.md)
+///
+///     A boolean indicating if the result contains an error.
+EMF_CBASE_RESULT_TYPEDEF(
+    emf_cbase_os_path_char_result_t, const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL, emf_cbase_module_error_t)
 
 /******************************************************************************************************
 *********************************************  Interface  *********************************************
@@ -749,7 +780,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_info,
 /// This function fetches the exportable interfaces from a module.
 /// The function must be thread-safe.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_exportable_interfaces,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
 
 /// A function pointer to a `get_runtime_dependencies` function.
@@ -757,7 +788,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_exportable_interf
 /// This function fetches the runtime dependencies from a module.
 /// The function must be thread-safe.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_runtime_dependencies,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
 
 /// A function pointer to a `get_interface` function.
@@ -773,15 +804,14 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_interface, EMF_CB
 /// This function fetches a list of dependencies the module needs to allow its loading.
 /// The function must be thread-safe.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_load_dependencies,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
 
 /// A function pointer to a `get_module_path` function.
 ///
 /// This function fetches the path a module was loaded from.
 /// The function must be thread-safe.
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path,
-    EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL,
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path, EMF_CBASE_NODISCARD emf_cbase_os_path_char_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
 
 /// Interface of a module loader.
@@ -976,13 +1006,15 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_interface_get_module_info,
 ///
 /// The function fetches the exportable interfaces from the module.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_interface_get_exportable_interfaces,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t, emf_cbase_native_module_t* EMF_CBASE_MAYBE_NULL module)
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
+    emf_cbase_native_module_t* EMF_CBASE_MAYBE_NULL module)
 
 /// A function pointer to a `get_runtime_dependencies` function.
 ///
 /// The function fetches the runtime dependencies from the module.
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_interface_get_runtime_dependencies,
-    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t, emf_cbase_native_module_t* EMF_CBASE_MAYBE_NULL module)
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
+    emf_cbase_native_module_t* EMF_CBASE_MAYBE_NULL module)
 
 /// A function pointer to a `get_interface` function.
 ///
@@ -994,8 +1026,8 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_interface_get_interface, EMF_CB
 /// A function pointer to a `get_load_dependencies` function.
 ///
 /// The function fetches a list of dependencies the module needs, in order for it to be loaded.
-EMF_CBASE_FUNCTION_PTR_T(
-    emf_cbase_native_module_interface_get_load_dependencies, EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t)
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_interface_get_load_dependencies,
+    EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_t, void)
 
 /// Interface of a native module.
 ///
@@ -1082,7 +1114,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_mod
     EMF_CBASE_NODISCARD emf_cbase_native_module_ptr_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
     emf_cbase_module_loader_module_handle_t module_handle)
 
-/// Interface of a native module loader.
+/// Interface of the native module loader.
 ///
 /// # Fields
 ///
@@ -1119,7 +1151,7 @@ extern "C" {
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1146,7 +1178,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_loader_handle_result_t EMF_CBASE_CALL_C emf
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_unregister_loader(
     emf_cbase_module_loader_handle_t loader_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1154,7 +1186,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_module_get_num_loaders() EMF_CBASE_NOEXCEPT;
 
 /// Copies the available module types.
@@ -1165,7 +1197,7 @@ EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_module_get_num_loaders() E
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1185,7 +1217,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_size_result_t EMF_CBASE_CALL_C emf_cbase_mo
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_module_get_num_modules() EMF_CBASE_NOEXCEPT;
 
 /// Copies the available module infos.
@@ -1196,7 +1228,7 @@ EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_module_get_num_modules() E
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1216,7 +1248,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_size_result_t EMF_CBASE_CALL_C emf_cbase_mo
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_module_get_num_exported_interfaces() EMF_CBASE_NOEXCEPT;
 
 /// Copies the descriptors of the exported interfaces.
@@ -1227,7 +1259,7 @@ EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_module_get_num_exported_in
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1251,7 +1283,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_size_result_t EMF_CBASE_CALL_C emf_cbase_mo
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1267,7 +1299,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_loader_handle_result_t EMF_CBASE_CALL_C emf
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1283,7 +1315,7 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_module_type_exis
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_module_module_exists(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1295,7 +1327,7 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_module_module_ex
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1307,11 +1339,11 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_module_module_ex
 EMF_CBASE_NODISCARD emf_cbase_module_handle_result_t EMF_CBASE_CALL_C emf_cbase_module_get_exported_interface_handle(
     const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface) EMF_CBASE_NOEXCEPT;
 
-/// Checks weather an exported interface exists.
+/// Checks whether an exported interface exists.
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1327,7 +1359,7 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_module_exported_
 *************************************  Unsafe system operations  *************************************
 ******************************************************************************************************/
 
-/// Created a new unlinked module handle.
+/// Creates a new unlinked module handle.
 ///
 /// # Warning
 ///
@@ -1336,10 +1368,10 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_module_exported_
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_handle_t EMF_CBASE_CALL_C emf_cbase_module_unsafe_create_module_handle() EMF_CBASE_NOEXCEPT;
 
-/// Removed an existing module handle.
+/// Removes an existing module handle.
 ///
 /// # Failure
 ///
@@ -1351,7 +1383,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_handle_t EMF_CBASE_CALL_C emf_cbase_module_
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_unsafe_remove_module_handle(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1367,7 +1399,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_unsafe_link_module(
     emf_cbase_module_handle_t module_handle, emf_cbase_module_loader_handle_t loader_handle,
     emf_cbase_module_loader_module_handle_t loader_module_handle) EMF_CBASE_NOEXCEPT;
@@ -1380,7 +1412,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_loader_module_handle_result_t EMF_CBASE_CALL_C
 emf_cbase_module_unsafe_get_loader_module_handle(emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1392,7 +1424,7 @@ emf_cbase_module_unsafe_get_loader_module_handle(emf_cbase_module_handle_t modul
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_loader_handle_result_t EMF_CBASE_CALL_C emf_cbase_module_unsafe_get_loader_handle(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1404,7 +1436,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_loader_handle_result_t EMF_CBASE_CALL_C emf
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_loader_interface_result_t EMF_CBASE_CALL_C emf_cbase_module_unsafe_get_loader(
     emf_cbase_module_loader_handle_t loader_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1420,7 +1452,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_loader_interface_result_t EMF_CBASE_CALL_C 
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1440,7 +1472,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_handle_result_t emf_cbase_module_add_module
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_module(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1454,8 +1486,8 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_mo
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
-EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t emf_cbase_module_get_load_dependencies(
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
+EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t emf_cbase_module_get_load_dependencies(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
 /// Fetches the load status of a module.
@@ -1466,7 +1498,7 @@ EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t emf_cbase_modul
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_status_result_t emf_cbase_module_fetch_status(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1478,7 +1510,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_status_result_t emf_cbase_module_fetch_stat
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1488,7 +1520,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_status_result_t emf_cbase_module_fetch_stat
 /// );
 /// ```
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_add_dependency(emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT;
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT;
 
 /// Removes an existing runtime dependency from the module.
 ///
@@ -1498,7 +1530,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_add_depen
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1508,7 +1540,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_add_depen
 /// );
 /// ```
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_dependency(emf_cbase_module_handle_t module_handle,
-    emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT;
+    const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor) EMF_CBASE_NOEXCEPT;
 
 /// Exports an interface of a module.
 ///
@@ -1519,7 +1551,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_de
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1529,7 +1561,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_remove_de
 /// );
 /// ```
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_export_interface(
-    emf_cbase_module_handle_t module_handle, emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor);
+    emf_cbase_module_handle_t module_handle, const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface_descriptor);
 
 /// Loads a module.
 ///
@@ -1540,7 +1572,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t emf_cbase_module_export_in
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_load(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1552,7 +1584,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_unload(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1565,7 +1597,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_initialize(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1582,7 +1614,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase_module_terminate(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1594,7 +1626,7 @@ EMF_CBASE_NODISCARD emf_cbase_module_error_optional_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_module_info_ptr_result_t EMF_CBASE_CALL_C emf_cbase_module_get_module_info(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
@@ -1606,9 +1638,9 @@ EMF_CBASE_NODISCARD emf_cbase_module_info_ptr_result_t EMF_CBASE_CALL_C emf_cbas
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
-EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_C emf_cbase_module_get_exportable_interfaces(
-    emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
+EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t EMF_CBASE_CALL_C
+emf_cbase_module_get_exportable_interfaces(emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
 /// Fetches a list of the runtime dependencies from a module.
 ///
@@ -1618,8 +1650,8 @@ EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
-EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_C emf_cbase_module_get_runtime_dependencies(
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
+EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t EMF_CBASE_CALL_C emf_cbase_module_get_runtime_dependencies(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
 /// Fetches an interface from a module.
@@ -1631,7 +1663,7 @@ EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_span_result_t EMF_CBASE_CALL_
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -1652,8 +1684,8 @@ EMF_CBASE_NODISCARD emf_cbase_module_interface_result_t EMF_CBASE_CALL_C emf_cba
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
-EMF_CBASE_NODISCARD emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL emf_cbase_module_get_module_path(
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
+EMF_CBASE_NODISCARD emf_cbase_os_path_char_result_t emf_cbase_module_get_module_path(
     emf_cbase_module_handle_t module_handle) EMF_CBASE_NOEXCEPT;
 
 #ifdef __cplusplus

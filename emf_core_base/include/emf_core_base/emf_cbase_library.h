@@ -490,7 +490,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext,
     const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path, int flags)
 #endif // defined(Win32) || defined(_WIN32)
 
-/// Interface of a native library loader.
+/// Interface of the native library loader.
 ///
 /// # Fields
 ///
@@ -526,7 +526,7 @@ extern "C" {
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -551,7 +551,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_loader_handle_result_t EMF_CBASE_CALL_C em
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbase_library_unregister_loader(
     emf_cbase_library_loader_handle_t loader_handle) EMF_CBASE_NOEXCEPT;
 
@@ -559,7 +559,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbas
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_library_get_num_loaders() EMF_CBASE_NOEXCEPT;
 
 /// Copies the strings of the registered library types into a buffer.
@@ -572,7 +572,7 @@ EMF_CBASE_NODISCARD size_t EMF_CBASE_CALL_C emf_cbase_library_get_num_loaders() 
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -596,7 +596,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_size_result_t EMF_CBASE_CALL_C emf_cbase_l
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -612,7 +612,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_loader_handle_result_t EMF_CBASE_CALL_C em
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -628,7 +628,7 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_library_type_exi
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_library_library_exists(
     emf_cbase_library_handle_t library_handle) EMF_CBASE_NOEXCEPT;
 
@@ -645,7 +645,7 @@ EMF_CBASE_NODISCARD emf_cbase_bool_t EMF_CBASE_CALL_C emf_cbase_library_library_
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_handle_t EMF_CBASE_CALL_C emf_cbase_library_unsafe_create_library_handle()
     EMF_CBASE_NOEXCEPT;
 
@@ -661,7 +661,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_handle_t EMF_CBASE_CALL_C emf_cbase_librar
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbase_library_unsafe_remove_library_handle(
     emf_cbase_library_handle_t library_handle) EMF_CBASE_NOEXCEPT;
 
@@ -679,7 +679,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbas
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbase_library_unsafe_link_library(
     emf_cbase_library_handle_t library_handle, emf_cbase_library_loader_handle_t loader_handle,
     emf_cbase_library_loader_library_handle_t loader_library_handle) EMF_CBASE_NOEXCEPT;
@@ -692,7 +692,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbas
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_loader_library_handle_result_t EMF_CBASE_CALL_C
 emf_cbase_library_unsafe_get_loader_library_handle(emf_cbase_library_handle_t library_handle) EMF_CBASE_NOEXCEPT;
 
@@ -704,7 +704,7 @@ emf_cbase_library_unsafe_get_loader_library_handle(emf_cbase_library_handle_t li
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_loader_handle_result_t EMF_CBASE_CALL_C emf_cbase_library_unsafe_get_loader_handle(
     emf_cbase_library_handle_t library_handle) EMF_CBASE_NOEXCEPT;
 
@@ -716,7 +716,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_loader_handle_result_t EMF_CBASE_CALL_C em
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_loader_interface_result_t EMF_CBASE_CALL_C emf_cbase_library_unsafe_get_loader_interface(
     emf_cbase_library_loader_handle_t loader_handle) EMF_CBASE_NOEXCEPT;
 
@@ -734,7 +734,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_loader_interface_result_t EMF_CBASE_CALL_C
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -755,7 +755,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_handle_result_t EMF_CBASE_CALL_C emf_cbase
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbase_library_unload(
     emf_cbase_library_handle_t library_handle) EMF_CBASE_NOEXCEPT;
 
@@ -770,7 +770,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_error_optional_t EMF_CBASE_CALL_C emf_cbas
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
@@ -793,7 +793,7 @@ EMF_CBASE_NODISCARD emf_cbase_library_data_symbol_result_t EMF_CBASE_CALL_C emf_
 ///
 /// # Undefined Behaviour
 ///
-/// The callee expects that the caller holds a lock (See [emf_lock()](./fn.emf_lock.md)).
+/// The callee expects that the caller holds a lock (See [emf_cbase_sys_lock()](./fn.emf_cbase_sys_lock.md)).
 /// Furthermore, the caller must ensure that the following preconditions hold:
 ///
 /// ```c
