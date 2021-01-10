@@ -106,6 +106,7 @@
       - [`emf_cbase_module_loader_interface_fetch_status_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_fetch_status_fn_t.md)
       - [`emf_cbase_module_loader_interface_get_exportable_interfaces_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_get_exportable_interfaces_fn_t.md)
       - [`emf_cbase_module_loader_interface_get_interface_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_get_interface_fn_t.md)
+- [`emf_cbase_module_loader_interface_get_internal_interface_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_get_internal_interface_fn_t.md)
       - [`emf_cbase_module_loader_interface_get_load_dependencies_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_get_load_dependencies_fn_t.md)
       - [`emf_cbase_module_loader_interface_get_module_info_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_get_module_info_fn_t.md)
       - [`emf_cbase_module_loader_interface_get_module_path_fn_t`](./emf-core-base/reference/type.emf_cbase_module_loader_interface_get_module_path_fn_t.md)
