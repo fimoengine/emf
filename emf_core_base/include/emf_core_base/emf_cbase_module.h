@@ -818,8 +818,8 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path, EMF_
 ///
 /// This function fetches a pointer to the internal loader interface.
 /// The function must be thread-safe.
-EMF_CBASE_FUNCTION_PTR_T(
-    emf_cbase_module_loader_interface_get_internal_interface, EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, void)
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_internal_interface,
+    EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader)
 
 /// Interface of a module loader.
 ///
