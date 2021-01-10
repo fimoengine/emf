@@ -1,70 +1,70 @@
-///! # Introduction
-///!
-///! The `library` api is a collection of procedures that provide a platform agnostic interface
-///! to loading shared libraries. The actual loading of a library is handled by a `library loader`.
-///! Each `library loader` is associated to a `library type`.
-///!
-///! ## Loaders
-///!
-///! The job of a `library loader` is to manage the loading and unloading of libraries.
-///! A `library loader` can be added by constructing a
-///! [`emf_cbase_library_loader_interface_t`](./struct.emf_cbase_library_loader_interface_t.md) and then calling the
-///! [`emf_cbase_library_register_loader()`](./fn.emf_cbase_library_register_loader.md) function.
-///!
-///! ## Library types
-///!
-///! The `library` api allows the loading of custom library formats.
-///! Each format is identified by a [`emf_cbase_library_type_t`](./struct.emf_cbase_library_type_t.md) and is
-///! associated to exactly one `library loader`.
-///!
-///! # Predefined Loaders
-///!
-///! Some `library loaders` are always present and can not be removed at runtime.
-///!
-///! ## Native
-///!
-///! The native `library loader` is able to load platform-specific libraries (e.g. dlopen()/LoadLibrary()).
-///! It is associated to the [`EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME`](./constant.EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME.md)
-///! `library type` and is reachable with the
-///! [`EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE`](./constant.EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE.md) handle.
-///!
-///! On posix the `library loader` defaults to the `RTLD_LAZY` and `RTLD_LOCAL` flags. More controll of how to load a library can
-///! be achieved by fetching a pointer to the interface with
-///! [`emf_cbase_library_unsafe_get_loader_interface`](./fn.emf_cbase_library_unsafe_get_loader_interface.md), casting it to a
-///! [`emf_cbase_native_library_loader_interface_t`](./struct.emf_cbase_native_library_loader_interface_t.md) and calling the
-///! [`load_ext_fn`](.type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md) function.
-///! If the library has dependencies on other libraries, then it must specify them by specifying an `rpath` on posix or
-///! embedding an `Activation Context manifest` into the library on Windows.
-///!
-///! # Example
-///!
-///! ```c
-///! const emf_cbase_os_path_char_t* library_path = "./example_lib.so";
-///!
-///! emf_cbase_library_handle_result_t library_handle_res =
-///!     emf_cbase_library_load(EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME, library_path);
-///! if (library_handle_res.has_error) {
-///!     emf_cbase_sys_panic("Unable to load the `./example_lib.so` library.");
-///! }
-///!
-///! emf_cbase_library_handle_t library_handle = library_handle_res.result;
-///!
-///! emf_cbase_library_fn_symbol_result_t fn_sym_res =
-///!     emf_cbase_library_get_function_symbol(library_handle, "example_fn");
-///! if (fn_sym_res.has_error) {
-///!     emf_cbase_sys_panic("Unable to load the `example_fn` function from the library.");
-///! }
-///!
-///! emf_cbase_library_fn_symbol_t fn_sym = fn_sym_res.result;
-///! void (*fn)(int, int) = (void(*)(int, int))fn_sym.symbol;
-///! (*fn)(5, 7);
-///!
-///! emf_cbase_library_error_optional_t error_opt =
-///!     emf_cbase_library_unload(library_handle);
-///! if (error_opt.has_value) {
-///!     emf_cbase_sys_panic("Unable to unload the `./example_lib.so` library.");
-///! }
-///! ```
+//! # Introduction
+//!
+//! The `library` api is a collection of procedures that provide a platform agnostic interface
+//! to loading shared libraries. The actual loading of a library is handled by a `library loader`.
+//! Each `library loader` is associated to a `library type`.
+//!
+//! ## Loaders
+//!
+//! The job of a `library loader` is to manage the loading and unloading of libraries.
+//! A `library loader` can be added by constructing a
+//! [`emf_cbase_library_loader_interface_t`](./struct.emf_cbase_library_loader_interface_t.md) and then calling the
+//! [`emf_cbase_library_register_loader()`](./fn.emf_cbase_library_register_loader.md) function.
+//!
+//! ## Library types
+//!
+//! The `library` api allows the loading of custom library formats.
+//! Each format is identified by a [`emf_cbase_library_type_t`](./struct.emf_cbase_library_type_t.md) and is
+//! associated to exactly one `library loader`.
+//!
+//! # Predefined Loaders
+//!
+//! Some `library loaders` are always present and can not be removed at runtime.
+//!
+//! ## Native
+//!
+//! The native `library loader` is able to load platform-specific libraries (e.g. dlopen()/LoadLibrary()).
+//! It is associated to the [`EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME`](./constant.EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME.md)
+//! `library type` and is reachable with the
+//! [`EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE`](./constant.EMF_CBASE_LIBRARY_LOADER_DEFAULT_HANDLE.md) handle.
+//!
+//! On posix the `library loader` defaults to the `RTLD_LAZY` and `RTLD_LOCAL` flags. More controll of how to load a library can
+//! be achieved by fetching a pointer to the interface with
+//! [`emf_cbase_library_unsafe_get_loader_interface`](./fn.emf_cbase_library_unsafe_get_loader_interface.md), casting it to a
+//! [`emf_cbase_native_library_loader_interface_t`](./struct.emf_cbase_native_library_loader_interface_t.md) and calling the
+//! [`load_ext_fn`](.type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md) function.
+//! If the library has dependencies on other libraries, then it must specify them by specifying an `rpath` on posix or
+//! embedding an `Activation Context manifest` into the library on Windows.
+//!
+//! # Example
+//!
+//! ```c
+//! const emf_cbase_os_path_char_t* library_path = "./example_lib.so";
+//!
+//! emf_cbase_library_handle_result_t library_handle_res =
+//!     emf_cbase_library_load(EMF_CBASE_NATIVE_LIBRARY_TYPE_NAME, library_path);
+//! if (library_handle_res.has_error) {
+//!     emf_cbase_sys_panic("Unable to load the `./example_lib.so` library.");
+//! }
+//!
+//! emf_cbase_library_handle_t library_handle = library_handle_res.result;
+//!
+//! emf_cbase_library_fn_symbol_result_t fn_sym_res =
+//!     emf_cbase_library_get_function_symbol(library_handle, "example_fn");
+//! if (fn_sym_res.has_error) {
+//!     emf_cbase_sys_panic("Unable to load the `example_fn` function from the library.");
+//! }
+//!
+//! emf_cbase_library_fn_symbol_t fn_sym = fn_sym_res.result;
+//! void (*fn)(int, int) = (void(*)(int, int))fn_sym.symbol;
+//! (*fn)(5, 7);
+//!
+//! emf_cbase_library_error_optional_t error_opt =
+//!     emf_cbase_library_unload(library_handle);
+//! if (error_opt.has_value) {
+//!     emf_cbase_sys_panic("Unable to unload the `./example_lib.so` library.");
+//! }
+//! ```
 #ifndef EMF_CORE_BASE_EMF_CBASE_LIBRARY_H
 #define EMF_CORE_BASE_EMF_CBASE_LIBRARY_H
 
@@ -411,8 +411,8 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_function_symbol,
 ///
 /// The function fetches a pointer to the internal interface of the loader.
 /// The function must be thread-safe.
-EMF_CBASE_FUNCTION_PTR_T(
-    emf_cbase_library_loader_interface_get_internal_interface, EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, void)
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_internal_interface,
+    EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader)
 
 /// Interface of a library loader.
 ///
