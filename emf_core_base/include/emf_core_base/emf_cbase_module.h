@@ -814,6 +814,13 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_load_dependencies
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path, EMF_CBASE_NODISCARD emf_cbase_os_path_char_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_module_loader_module_handle_t module_handle)
 
+/// A function pointer to a `get_internal_interface` function.
+///
+/// This function fetches a pointer to the internal loader interface.
+/// The function must be thread-safe.
+EMF_CBASE_FUNCTION_PTR_T(
+    emf_cbase_module_loader_interface_get_internal_interface, EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, void)
+
 /// Interface of a module loader.
 ///
 /// # Fields
@@ -897,6 +904,12 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path, EMF_
 ///
 ///     The get_module_path function of the module loader.
 ///     May not be `NULL`.
+///
+/// - **get_internal_interface_fn**:
+/// [`emf_cbase_module_loader_interface_get_internal_interface_fn_t`](./type.emf_cbase_module_loader_interface_get_internal_interface_fn_t.md)
+///
+///     The get_internal_interface function of the module loader.
+///     May not be `NULL`.
 typedef struct emf_cbase_module_loader_interface_t {
     /// Module loader.
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader;
@@ -926,6 +939,8 @@ typedef struct emf_cbase_module_loader_interface_t {
     emf_cbase_module_loader_interface_get_load_dependencies_fn_t EMF_CBASE_NOT_NULL get_load_dependencies_fn;
     /// Get module path function.
     emf_cbase_module_loader_interface_get_module_path_fn_t EMF_CBASE_NOT_NULL get_module_path_fn;
+    /// Get internal interface function.
+    emf_cbase_module_loader_interface_get_internal_interface_fn_t EMF_CBASE_NOT_NULL get_internal_interface_fn;
 } emf_cbase_module_loader_interface_t;
 
 /// A struct containing either an `const emf_cbase_module_loader_interface_t*` or an `emf_cbase_module_error_t`
@@ -1118,7 +1133,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_mod
 ///
 /// # Fields
 ///
-/// - **module_loader_interface**: [`emf_cbase_module_loader_interface_t`](./struct.emf_cbase_module_loader_interface_t.md)
+/// - **module_loader_interface**: [`const emf_cbase_module_loader_interface_t*`](./struct.emf_cbase_module_loader_interface_t.md)
 ///
 ///     The base module loader interface.
 ///
@@ -1129,7 +1144,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_mod
 ///     May not be `NULL`.
 typedef struct emf_cbase_native_module_loader_interface_t {
     /// Module loader interface.
-    emf_cbase_module_loader_interface_t module_loader_interface;
+    const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL module_loader_interface;
     emf_cbase_native_module_loader_interface_get_native_module_fn_t EMF_CBASE_NOT_NULL get_native_module_fn;
 } emf_cbase_native_module_loader_interface_t;
 

@@ -101,6 +101,7 @@ emf_cbase_sys_unlock();
 - [`emf_cbase_fn_t`](../reference/type.emf_cbase_fn_t.md)
 - [`emf_cbase_library_loader_interface_get_data_symbol_fn_t`](../reference/type.emf_cbase_library_loader_interface_get_data_symbol_fn_t.md)
 - [`emf_cbase_library_loader_interface_get_function_symbol_fn_t`](../reference/type.emf_cbase_library_loader_interface_get_function_symbol_fn_t.md)
+- [`emf_cbase_library_loader_interface_get_internal_interface_fn_t`](../reference/type.emf_cbase_library_loader_interface_get_internal_interface_fn_t.md)
 - [`emf_cbase_library_loader_interface_load_fn_t`](../reference/type.emf_cbase_library_loader_interface_load_fn_t.md)
 - [`emf_cbase_library_loader_interface_unload_fn_t`](../reference/type.emf_cbase_library_loader_interface_unload.md)
 - [`emf_cbase_native_library_loader_interface_load_ext_fn_t`](../reference/type.emf_cbase_native_library_loader_interface_load_ext_fn_t.md)
