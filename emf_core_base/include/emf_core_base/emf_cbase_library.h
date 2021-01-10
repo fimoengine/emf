@@ -407,34 +407,47 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_function_symbol,
     EMF_CBASE_NODISCARD emf_cbase_library_fn_symbol_result_t, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
     emf_cbase_library_loader_library_handle_t library_handle, const char* EMF_CBASE_NOT_NULL symbol_name)
 
+/// A function pointer to a `get_internal_interface` function.
+///
+/// The function fetches a pointer to the internal interface of the loader.
+/// The function must be thread-safe.
+EMF_CBASE_FUNCTION_PTR_T(
+    emf_cbase_library_loader_interface_get_internal_interface, EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, void)
+
 /// Interface of a library loader.
 ///
 /// # Fields
 ///
-/// - **library_loader**: [`emf_cbase_library_loader_t*`](./struct.emf_cbase_library_loader_t.md)
+/// - **library_loader**: [`emf_cbase_library_loader_t`](./struct.emf_cbase_library_loader_t.md)
 ///
 ///     A pointer to the library loader.
 ///
-/// - **load_fn**: [`emf_cbase_library_loader_interface_load_fn_t*`](./type.emf_cbase_library_loader_interface_load_fn_t.md)
+/// - **load_fn**: [`emf_cbase_library_loader_interface_load_fn_t`](./type.emf_cbase_library_loader_interface_load_fn_t.md)
 ///
 ///     The load function of the library loader.
 ///     May not be `NULL`.
 ///
-/// - **unload_fn**: [`emf_cbase_library_loader_interface_unload_fn_t*`](./type.emf_cbase_library_loader_interface_unload_fn_t.md)
+/// - **unload_fn**: [`emf_cbase_library_loader_interface_unload_fn_t`](./type.emf_cbase_library_loader_interface_unload_fn_t.md)
 ///
 ///     The unload function of the library loader.
 ///     May not be `NULL`.
 ///
 /// - **get_data_symbol_fn**:
-/// [`emf_cbase_library_loader_interface_get_data_symbol_fn_t*`](./type.emf_cbase_library_loader_interface_get_data_symbol_fn_t.md)
+/// [`emf_cbase_library_loader_interface_get_data_symbol_fn_t`](./type.emf_cbase_library_loader_interface_get_data_symbol_fn_t.md)
 ///
 ///     The get_data_symbol function of the library loader.
 ///     May not be `NULL`.
 ///
 /// - **get_function_fn**:
-/// [`emf_cbase_library_loader_interface_get_function_symbol_fn_t*`](./type.emf_cbase_library_loader_interface_get_function_symbol_fn_t.md)
+/// [`emf_cbase_library_loader_interface_get_function_symbol_fn_t`](./type.emf_cbase_library_loader_interface_get_function_symbol_fn_t.md)
 ///
 ///     The get_function function of the library loader.
+///     May not be `NULL`.
+///
+/// - **get_internal_interface_fn**:
+/// [`emf_cbase_library_loader_interface_get_internal_interface_fn_t`](./type.emf_cbase_library_loader_interface_get_internal_interface_fn_t.md)
+///
+///     The get_internal_interface function of the library loader.
 ///     May not be `NULL`.
 typedef struct emf_cbase_library_loader_interface_t {
     /// Library loader.
@@ -447,6 +460,8 @@ typedef struct emf_cbase_library_loader_interface_t {
     emf_cbase_library_loader_interface_get_data_symbol_fn_t EMF_CBASE_NOT_NULL get_data_symbol_fn;
     /// Get function function.
     emf_cbase_library_loader_interface_get_function_symbol_fn_t EMF_CBASE_NOT_NULL get_function_fn;
+    /// Get internal interface function.
+    emf_cbase_library_loader_interface_get_internal_interface_fn_t EMF_CBASE_NOT_NULL get_internal_interface_fn;
 } emf_cbase_library_loader_interface_t;
 
 /// A struct containing either an `const emf_cbase_library_loader_interface_t*` or an `emf_cbase_library_error_t`
@@ -494,7 +509,8 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext,
 ///
 /// # Fields
 ///
-/// - **library_loader_interface**: [`emf_cbase_library_loader_interface_t`](./struct.emf_cbase_library_loader_interface_t.md)
+/// - **library_loader_interface**:
+/// [`const emf_cbase_library_loader_interface_t*`](./struct.emf_cbase_library_loader_interface_t.md)
 ///
 ///     The base library loader interface.
 ///
@@ -504,7 +520,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext,
 ///     The load_ext function of the module loader.
 ///     May not be `NULL`.
 typedef struct emf_cbase_native_library_loader_interface_t {
-    emf_cbase_library_loader_interface_t library_loader_interface;
+    const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL library_loader_interface;
     emf_cbase_native_library_loader_interface_load_ext_fn_t EMF_CBASE_NOT_NULL load_ext_fn;
 } emf_cbase_native_library_loader_interface_t;
 
