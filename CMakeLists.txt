@@ -31,18 +31,12 @@ option(EMF_ENABLE_EMF_CORE_BASE "Enable emf-core-base" ON)
 
 # Libraries
 option(EMF_ENABLE_EMF_CORE_BINDINGS "Enable emf-core-bindings" ON)
-option(EMF_ENABLE_EMF_CORE_BASE_BINDINGS "Enable emf-core-base-bindings" ON)
 
 # Enable dependencies
 
 # emf-core-bindings
 if(EMF_ENABLE_EMF_CORE_BINDINGS)
   set(EMF_ENABLE_EMF_CORE ON)
-endif()
-
-# emf-core-base-bindings
-if(EMF_ENABLE_EMF_CORE_BASE_BINDINGS)
-  set(EMF_ENABLE_EMF_CORE_BASE ON)
 endif()
 
 # Add subprojects
@@ -60,9 +54,4 @@ endif()
 # emf-core-base
 if(EMF_ENABLE_EMF_CORE_BASE)
   add_subdirectory(emf_core_base)
-endif()
-
-# emf-core-base-bindings
-if(EMF_ENABLE_EMF_CORE_BASE_BINDINGS)
-  add_subdirectory(emf_core_base_bindings)
 endif()
