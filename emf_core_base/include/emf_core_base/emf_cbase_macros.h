@@ -48,14 +48,14 @@
 #define EMF_CBASE_NORETURN [[noreturn]]
 #define EMF_CBASE_FUNCTION_PTR_T(Name, Ret_T, ...)                                                                               \
     namespace CBASE_FUNCTION_PTR_DUMMYS {                                                                                        \
-    Ret_T EMF_CBASE_CALL_C Name##_fn_dummy(__VA_ARGS__) EMF_CBASE_NOEXCEPT;                                                      \
+    Ret_T EMF_CBASE_CALL_C Name##_dummy(__VA_ARGS__) EMF_CBASE_NOEXCEPT;                                                         \
     }                                                                                                                            \
-    using Name##_fn_t = decltype(&CBASE_FUNCTION_PTR_DUMMYS::Name##_fn_dummy);
+    using Name = decltype(&CBASE_FUNCTION_PTR_DUMMYS::Name##_dummy);
 #define EMF_CBASE_EXTERN_C extern "C"
 #else
 #define EMF_CBASE_NOEXCEPT
 #define EMF_CBASE_NORETURN _Noreturn
-#define EMF_CBASE_FUNCTION_PTR_T(Name, Ret_T, ...) typedef Ret_T(EMF_CBASE_CALL_C* Name##_fn_t)(__VA_ARGS__);
+#define EMF_CBASE_FUNCTION_PTR_T(Name, Ret_T, ...) typedef Ret_T(EMF_CBASE_CALL_C* Name)(__VA_ARGS__);
 #define EMF_CBASE_EXTERN_C
 #endif // __cplusplus
 
@@ -88,7 +88,7 @@
     struct Name {                                                                                                                \
         union {                                                                                                                  \
             T value;                                                                                                             \
-            emf_cbase_bool_t _dummy;                                                                                             \
+            int8_t _dummy;                                                                                                       \
         };                                                                                                                       \
         emf_cbase_bool_t has_value;                                                                                              \
     }

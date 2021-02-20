@@ -1,5 +1,5 @@
-#ifndef EMF_CORE_BASE_EMF_CBASE_BOOL_T_H
-#define EMF_CORE_BASE_EMF_CBASE_BOOL_T_H
+#ifndef EMF_CBASE_EMF_CBASE_BOOL_T_H
+#define EMF_CBASE_EMF_CBASE_BOOL_T_H
 
 #ifdef __cplusplus
 #include <cstdint>
@@ -13,18 +13,8 @@
 namespace EMF::CoreBase::C {
 #endif // __cplusplus
 
-/// An enum describing a boolean value.
-///
-/// # Variants
-///
-/// | Name                     | Value | Description  |
-/// | ------------------------ | ----- | ------------ |
-/// | **emf_cbase_bool_false** | `0`   | False value. |
-/// | **emf_cbase_bool_true**  | `1`   | True value.  |
 typedef enum emf_cbase_bool_t : int8_t {
-    /// False.
     emf_cbase_bool_false = 0,
-    /// True.
     emf_cbase_bool_true = 1
 } emf_cbase_bool_t;
 
@@ -32,4 +22,4 @@ typedef enum emf_cbase_bool_t : int8_t {
 }
 #endif // __cplusplus
 
-#endif // !EMF_CORE_BASE_EMF_BOOL_T_H
+#endif // !EMF_CBASE_EMF_CBASE_BOOL_T_H
