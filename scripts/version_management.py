@@ -11,7 +11,7 @@ def get_version_string_long(major, minor, patch, pre_release_type, pre_release_b
     if pre_release_type == 0:
         return get_version_string(major, minor, patch)
     else:
-        pre_release_type_strings = ['gold', 'pre-alpha', 'alpha', 'beta', 'rc']
+        pre_release_type_strings = ['stable', 'unstable', 'beta']
         pre_release_type_string = pre_release_type_strings[pre_release_type]
 
         return get_version_string(major, minor, patch) + '-{}.{}'.format(pre_release_type_string, pre_release_build)
@@ -106,12 +106,12 @@ def print(version, build):
 @click.option('--major_key', default='MAJOR', help='The keyword to replace with the major number.')
 @click.option('--minor_key', default='MINOR', help='The keyword to replace with the minor number.')
 @click.option('--patch_key', default='PATCH', help='The keyword to replace with the patch number.')
-@click.option('--pre_release_type_key', default='PRE_RELEASE_TYPE', help='The keyword to replace with the pre-release type number.')
-@click.option('--pre_release_build_key', default='PRE_RELEASE_BUILD', help='The keyword to replace with the pre-release build number.')
+@click.option('--pre_release_type_key', default='RELEASE_TYPE', help='The keyword to replace with the pre-release type number.')
+@click.option('--pre_release_build_key', default='RELEASE_NUMBER', help='The keyword to replace with the pre-release build number.')
 @click.option('--build_key', default='BUILD', help='The keyword to replace with the build number.')
-@click.option('--version_key', default='VERSION', help='The keyword to replace with the version string.')
-@click.option('--version_long_key', default='VERSION_LONG', help='The keyword to replace with the long version string.')
-@click.option('--version_full_key', default='VERSION_FULL', help='The keyword to replace with the full version string.')
+@click.option('--version_key', default='STRING_SHORT', help='The keyword to replace with the version string.')
+@click.option('--version_long_key', default='STRING_LONG', help='The keyword to replace with the long version string.')
+@click.option('--version_full_key', default='STRING_FULL', help='The keyword to replace with the full version string.')
 @click.option('--prefix', default='', help='The prefix of all keywords to replace.')
 @click.option('--suffix', default='', help='The suffix of all keywords to replace.')
 @click.option('--delimiter', default='!', help='The delimiter of all keywords to replace.')
