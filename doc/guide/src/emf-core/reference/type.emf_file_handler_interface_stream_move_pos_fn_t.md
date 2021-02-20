@@ -1,1 +1,0 @@
-# emf_file_handler_interface_stream_move_pos_fn_t

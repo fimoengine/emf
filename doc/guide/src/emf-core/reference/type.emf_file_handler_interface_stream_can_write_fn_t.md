@@ -1,1 +1,0 @@
-# emf_file_handler_interface_stream_can_write_fn_t
