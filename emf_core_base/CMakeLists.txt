@@ -44,8 +44,8 @@ endif()
 monitor_version(
   emf_core_base_replace_version.ini
   ${PROJECT_SOURCE_DIR}/include/emf_core_base/version.h.in
-  ${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/version.h
-  ${PROJECT_SOURCE_DIR}/version.json --prefix EMF_CORE_BASE_)
+  ${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/emf_cbase_version.h
+  ${PROJECT_SOURCE_DIR}/version.json --prefix EMF_CBASE_VERSION_ --version_long_key STRING --build -2)
 
 add_library(emf_core_base INTERFACE)
 add_dependencies(emf_core_base emf_core_base_replace_version.ini)
@@ -68,8 +68,8 @@ target_compile_options(
 target_sources(
   emf_core_base
   INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/version.h>
-  $<INSTALL_INTERFACE:include/emf_core_base/version.h>)
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/emf_cbase_version.h>
+  $<INSTALL_INTERFACE:include/emf_core_base/emf_cbase_version.h>)
 
 foreach(f IN LISTS EMF_CORE_BASE_SRC)
   target_sources(
@@ -79,7 +79,7 @@ endforeach()
 
 install(DIRECTORY include/emf_core_base DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/version.h
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/emf_cbase_version.h
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/emf_core_base)
 
 install(TARGETS emf_core_base EXPORT ${PROJECT_NAME}Targets)
