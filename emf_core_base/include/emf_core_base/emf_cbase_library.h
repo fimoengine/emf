@@ -172,7 +172,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_internal_library_handle_fn_t,
 // library management
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_load_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_handle_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_loader_handle_t loader_handle,
-    const emf_cbase_os_path_char_t* library_path)
+    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_unload_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_data_symbol_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_data_symbol_result_t,
