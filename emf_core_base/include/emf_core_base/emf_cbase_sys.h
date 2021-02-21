@@ -18,7 +18,7 @@ namespace EMF::CoreBase::C {
 typedef struct emf_cbase_t emf_cbase_t;
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_fn_t, void, void)
-EMF_CBASE_OPTIONAL_TYPEDEF(emf_cbase_fn_optional_t, emf_cbase_fn_t)
+EMF_CBASE_OPTIONAL_TYPEDEF(emf_cbase_fn_optional_t, emf_cbase_fn_t EMF_CBASE_NOT_NULL)
 
 // sync handler interface
 typedef struct emf_cbase_sync_handler_t emf_cbase_sync_handler_t;
@@ -38,7 +38,8 @@ typedef struct emf_cbase_sync_handler_interface_t {
 // sys api
 // termination
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_shutdown_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module)
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_panic_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const char* error)
+EMF_CBASE_FUNCTION_PTR_T(
+    emf_cbase_sys_panic_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const char* EMF_CBASE_MAYBE_NULL error)
 
 // queries
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_has_function_fn_t, EMF_CBASE_NODISCARD emf_cbase_bool_t,

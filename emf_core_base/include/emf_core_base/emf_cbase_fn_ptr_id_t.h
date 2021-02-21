@@ -91,7 +91,7 @@ typedef enum emf_cbase_fn_ptr_id_t : int32_t {
     emf_cbase_fn_ptr_id_module_get_module_path = 333,
     emf_cbase_fn_ptr_id_module_get_module_info = 334,
     emf_cbase_fn_ptr_id_module_get_interface = 335,
-} emf_cbase_fn_ptr_id;
+} emf_cbase_fn_ptr_id_t;
 
 #ifdef __cplusplus
 }
