@@ -77,6 +77,11 @@ foreach(f IN LISTS EMF_CORE_BASE_SRC)
     $<INSTALL_INTERFACE:${f}>)
 endforeach()
 
+add_library(emf_core_base.int STATIC empty.h)
+target_link_libraries(emf_core_base.int PUBLIC emf_core_base)
+target_compile_features(emf_core_base.int PRIVATE cxx_std_17)
+set_target_properties(emf_core_base.int PROPERTIES LINKER_LANGUAGE CXX)
+
 install(DIRECTORY include/emf_core_base DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/emf_core_base/emf_cbase_version.h
