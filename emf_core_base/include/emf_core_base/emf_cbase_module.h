@@ -41,7 +41,7 @@ typedef enum emf_cbase_module_error_t : int32_t {
     emf_cbase_module_error_module_state_invalid = 1,
     emf_cbase_module_error_module_handle_invalid = 2,
     emf_cbase_module_error_loader_handle_invalid = 3,
-    emf_cbase_module_error_loader_module_handle_invalid = 4,
+    emf_cbase_module_error_internal_handle_invalid = 4,
     emf_cbase_module_error_module_type_invalid = 5,
     emf_cbase_module_error_module_type_not_found = 6,
     emf_cbase_module_error_duplicate_module_type = 7,
@@ -271,7 +271,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_remove_module_handle_fn_t, EMF_CBASE_N
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_link_module_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle,
-    emf_cbase_module_loader_handle_t loader_handle, emf_cbase_internal_module_handle_t loader_module_handle)
+    emf_cbase_module_loader_handle_t loader_handle, emf_cbase_internal_module_handle_t internal_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_internal_module_handle_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_internal_module_handle_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
     emf_cbase_module_handle_t module_handle)
