@@ -38,14 +38,18 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_ext_unw_int_set_panic_fn_fn_t, void, emf_cbas
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_ext_unw_int_get_panic_fn_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_ext_unw_int_panic_fn_t EMF_CBASE_MAYBE_NULL, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module)
 
-typedef struct emf_cbase_ext_unw_int_interface {
+typedef struct emf_cbase_ext_unw_int_interface_t {
     emf_cbase_ext_unw_int_set_context_fn_t EMF_CBASE_NOT_NULL set_context_fn;
     emf_cbase_ext_unw_int_get_context_fn_t EMF_CBASE_NOT_NULL get_context_fn;
     emf_cbase_ext_unw_int_set_shutdown_fn_fn_t EMF_CBASE_NOT_NULL set_shutdown_fn_fn;
     emf_cbase_ext_unw_int_get_shutdown_fn_fn_t EMF_CBASE_NOT_NULL get_shutdown_fn_fn;
     emf_cbase_ext_unw_int_set_panic_fn_fn_t EMF_CBASE_NOT_NULL set_panic_fn_fn;
     emf_cbase_ext_unw_int_get_panic_fn_fn_t EMF_CBASE_NOT_NULL get_panic_fn_fn;
-} emf_cbase_ext_unw_int_interface;
+} emf_cbase_ext_unw_int_interface_t;
+
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_ext_unw_int_get_unw_int_interface,
+    EMF_CBASE_NODISCARD const emf_cbase_ext_unw_int_interface_t* EMF_CBASE_NOT_NULL,
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module)
 
 #ifdef __cplusplus
 }
