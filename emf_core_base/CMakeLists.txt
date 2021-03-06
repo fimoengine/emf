@@ -30,7 +30,8 @@ set(EMF_CORE_BASE_SRC
     include/emf_core_base/emf_cbase_macros.h
     include/emf_core_base/emf_cbase_module.h
     include/emf_core_base/emf_cbase_sys.h
-    include/emf_core_base/emf_cbase_version_t.h)
+    include/emf_core_base/emf_cbase_version_t.h
+    include/emf_core_base/extensions/emf_unwind_internal/emf_unwind_internal.h)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
   set(CXX_17_STANDARD_FLAG /std:c++17)
