@@ -7,7 +7,15 @@
 
 #ifndef EMF_CBASE_CALL_C
 #ifdef __GNUC__
-#define EMF_CBASE_CALL_C __attribute__((__cdecl__))
+#if defined(__i386__)
+#define EMF_CBASE_CALL_C __attribute__((cdecl))
+#elif defined(__x86_64__) && (defined(_WIN32) || defined(_WIN64))
+#define EMF_CBASE_CALL_C __attribute__((ms_abi))
+#elif defined(__x86_64__)
+#define EMF_CBASE_CALL_C __attribute__((sysv_abi))
+#else
+#define EMF_CBASE_CALL_C
+#endif // __i386__
 #else
 #define EMF_CBASE_CALL_C __cdecl
 #endif // __GNUC__
@@ -38,6 +46,14 @@
 #define EMF_CBASE_NODISCARD
 #endif // defined(__clang__) || defined(__GNUC__)
 #endif // __cplusplus
+
+/******************************************************************************************************
+****************************************  EMF_CBASE_USE_ENUMS  ****************************************
+******************************************************************************************************/
+
+#if defined(__cplusplus) || defined(__clang__)
+#define EMF_CBASE_USE_ENUMS
+#endif // defined(__cplusplus) || defined(__clang__)
 
 /******************************************************************************************************
 ***********************************************  Misc  ***********************************************
