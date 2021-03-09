@@ -32,6 +32,7 @@ namespace EMF::CoreBase::C {
 typedef struct emf_cbase_t emf_cbase_t;
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_fn_t, void, void)
 
+#ifdef EMF_CBASE_USE_ENUMS
 typedef enum emf_cbase_library_predefined_handles_t : int32_t {
     emf_cbase_library_predefined_handles_native = 0,
 } emf_cbase_library_predefined_handles_t;
@@ -47,6 +48,23 @@ typedef enum emf_cbase_library_error_t : int32_t {
     emf_cbase_library_error_symbol_not_found = 7,
     emf_cbase_library_error_buffer_overflow = 8,
 } emf_cbase_library_error_t;
+#else
+typedef int32_t emf_cbase_library_predefined_handles_t;
+
+#define emf_cbase_library_predefined_handles_native (emf_cbase_library_predefined_handles_t)0
+
+typedef int32_t emf_cbase_library_error_t;
+
+#define emf_cbase_library_error_library_path_not_found (emf_cbase_library_error_t)0
+#define emf_cbase_library_error_library_handle_invalid (emf_cbase_library_error_t)1
+#define emf_cbase_library_error_loader_handle_invalid (emf_cbase_library_error_t)2
+#define emf_cbase_library_error_loader_library_handle_invalid (emf_cbase_library_error_t)3
+#define emf_cbase_library_error_library_type_invalid (emf_cbase_library_error_t)4
+#define emf_cbase_library_error_library_type_not_found (emf_cbase_library_error_t)5
+#define emf_cbase_library_error_duplicate_library_type (emf_cbase_library_error_t)6
+#define emf_cbase_library_error_symbol_not_found (emf_cbase_library_error_t)7
+#define emf_cbase_library_error_buffer_overflow (emf_cbase_library_error_t)8
+#endif // EMF_CBASE_USE_ENUMS
 
 typedef EMF_CBASE_OS_PATH_CHAR emf_cbase_os_path_char_t;
 
@@ -132,7 +150,7 @@ EMF_CBASE_RESULT_TYPEDEF(emf_cbase_native_library_handle_result_t, emf_cbase_nat
     emf_cbase_library_error_t)
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_get_native_handle_fn_t, emf_cbase_native_library_handle_result_t,
-    emf_cbase_library_loader_t*, library_loader, emf_cbase_internal_library_handle_t internal_handle)
+    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_internal_library_handle_t internal_handle)
 
 typedef struct emf_cbase_native_library_loader_interface_t {
     const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL library_loader_interface;

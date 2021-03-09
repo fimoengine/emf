@@ -32,6 +32,7 @@ namespace EMF::CoreBase::C {
 
 typedef struct emf_cbase_t emf_cbase_t;
 
+#ifdef EMF_CBASE_USE_ENUMS
 typedef enum emf_cbase_module_predefined_handles_t : int32_t {
     emf_cbase_module_predefined_handles_native = 0,
 } emf_cbase_module_predefined_handles_t;
@@ -56,6 +57,32 @@ typedef enum emf_cbase_module_status_t : int32_t {
     emf_cbase_module_status_terminated = 1,
     emf_cbase_module_status_ready = 2,
 } emf_cbase_module_status_t;
+#else
+typedef int32_t emf_cbase_module_predefined_handles_t;
+
+#define emf_cbase_module_predefined_handles_native (emf_cbase_module_predefined_handles_t)0
+
+typedef int32_t emf_cbase_module_error_t;
+
+#define emf_cbase_module_error_path_invalid (emf_cbase_module_error_t)0
+#define emf_cbase_module_error_module_state_invalid (emf_cbase_module_error_t)1
+#define emf_cbase_module_error_module_handle_invalid (emf_cbase_module_error_t)2
+#define emf_cbase_module_error_loader_handle_invalid (emf_cbase_module_error_t)3
+#define emf_cbase_module_error_internal_handle_invalid (emf_cbase_module_error_t)4
+#define emf_cbase_module_error_module_type_invalid (emf_cbase_module_error_t)5
+#define emf_cbase_module_error_module_type_not_found (emf_cbase_module_error_t)6
+#define emf_cbase_module_error_duplicate_module_type (emf_cbase_module_error_t)7
+#define emf_cbase_module_error_interface_not_found (emf_cbase_module_error_t)8
+#define emf_cbase_module_error_duplicate_interface (emf_cbase_module_error_t)9
+#define emf_cbase_module_error_module_dependency_not_found (emf_cbase_module_error_t)10
+#define emf_cbase_module_error_buffer_overflow (emf_cbase_module_error_t)11
+
+typedef int32_t emf_cbase_module_status_t;
+
+#define emf_cbase_module_status_unloaded (emf_cbase_module_status_t)0
+#define emf_cbase_module_status_terminated (emf_cbase_module_status_t)1
+#define emf_cbase_module_status_ready (emf_cbase_module_status_t)2
+#endif // EMF_CBASE_USE_ENUMS
 
 typedef struct emf_cbase_module_handle_t {
     int32_t id;

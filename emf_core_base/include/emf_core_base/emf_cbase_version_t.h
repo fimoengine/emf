@@ -18,6 +18,7 @@ namespace EMF::CoreBase::C {
 
 typedef struct emf_cbase_t emf_cbase_t;
 
+#ifdef EMF_CBASE_USE_ENUMS
 typedef enum emf_cbase_version_error_t : int32_t {
     emf_cbase_version_error_invalid_string = 0,
     emf_cbase_version_error_buffer_overflow = 1,
@@ -28,6 +29,18 @@ typedef enum emf_cbase_version_release_t : int8_t {
     emf_cbase_version_release_unstable = 1,
     emf_cbase_version_release_beta = 2,
 } emf_cbase_version_release_t;
+#else
+typedef int32_t emf_cbase_version_error_t;
+
+#define emf_cbase_version_error_invalid_string (emf_cbase_version_error_t)0
+#define emf_cbase_version_error_buffer_overflow (emf_cbase_version_error_t)1
+
+typedef int8_t emf_cbase_version_release_t;
+
+#define emf_cbase_version_release_stable (emf_cbase_version_release_t)0
+#define emf_cbase_version_release_unstable (emf_cbase_version_release_t)1
+#define emf_cbase_version_release_beta (emf_cbase_version_release_t)2
+#endif // EMF_CBASE_USE_ENUMS
 
 typedef struct emf_cbase_version_t {
     int32_t major;
