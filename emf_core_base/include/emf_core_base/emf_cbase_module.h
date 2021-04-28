@@ -242,13 +242,19 @@ typedef struct emf_cbase_native_module_interface_t {
 } emf_cbase_native_module_interface_t;
 
 // native module loader interface
+EMF_CBASE_RESULT_TYPEDEF(emf_cbase_native_module_interface_ptr_result_t,
+    const emf_cbase_native_module_interface_t* EMF_CBASE_NOT_NULL, emf_cbase_module_error_t)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_module_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_native_module_ptr_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
     emf_cbase_internal_module_handle_t module_handle)
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_module_interface_fn_t,
+    EMF_CBASE_NODISCARD emf_cbase_native_module_interface_ptr_result_t,
+    emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_internal_module_handle_t module_handle)
 
 typedef struct emf_cbase_native_module_loader_interface_t {
     const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL module_loader_interface;
     emf_cbase_native_module_loader_interface_get_native_module_fn_t EMF_CBASE_NOT_NULL get_native_module_fn;
+    emf_cbase_native_module_loader_interface_get_native_module_interface_fn_t EMF_CBASE_NOT_NULL get_native_module_interface_fn;
 } emf_cbase_native_module_loader_interface_t;
 
 // module api
