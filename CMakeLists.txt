@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Find Python3
+if (POLICY CMP0094)
+  cmake_policy(SET CMP0094 NEW)
+endif()
+
+if (NOT DEFINED Python_FIND_REGISTRY)
+  set(Python_FIND_REGISTRY "LAST")
+endif ()
+if (NOT DEFINED Python_FIND_FRAMEWORK)
+  set(Python_FIND_FRAMEWORK "LAST")
+endif ()
+
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/)
