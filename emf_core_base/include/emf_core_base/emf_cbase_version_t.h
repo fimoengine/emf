@@ -10,6 +10,7 @@
 #endif // __cplusplus
 
 #include <emf_core_base/emf_cbase_bool_t.h>
+#include <emf_core_base/emf_cbase_error_t.h>
 #include <emf_core_base/emf_cbase_macros.h>
 
 #ifdef __cplusplus
@@ -19,22 +20,12 @@ namespace EMF::CoreBase::C {
 typedef struct emf_cbase_t emf_cbase_t;
 
 #ifdef EMF_CBASE_USE_ENUMS
-typedef enum emf_cbase_version_error_t : int32_t {
-    emf_cbase_version_error_invalid_string = 0,
-    emf_cbase_version_error_buffer_overflow = 1,
-} emf_cbase_version_error_t;
-
 typedef enum emf_cbase_version_release_t : int8_t {
     emf_cbase_version_release_stable = 0,
     emf_cbase_version_release_unstable = 1,
     emf_cbase_version_release_beta = 2,
 } emf_cbase_version_release_t;
 #else
-typedef int32_t emf_cbase_version_error_t;
-
-#define emf_cbase_version_error_invalid_string (emf_cbase_version_error_t)0
-#define emf_cbase_version_error_buffer_overflow (emf_cbase_version_error_t)1
-
 typedef int8_t emf_cbase_version_release_t;
 
 #define emf_cbase_version_release_stable (emf_cbase_version_release_t)0
@@ -53,8 +44,8 @@ typedef struct emf_cbase_version_t {
 
 EMF_CBASE_SPAN_TYPEDEF(emf_cbase_version_string_buffer_t, char)
 EMF_CBASE_SPAN_TYPEDEF(emf_cbase_version_const_string_buffer_t, const char)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_version_size_result_t, size_t, emf_cbase_version_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_version_result_t, emf_cbase_version_t, emf_cbase_version_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_version_size_result_t, size_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_version_result_t, emf_cbase_version_t)
 
 // version api
 // construction

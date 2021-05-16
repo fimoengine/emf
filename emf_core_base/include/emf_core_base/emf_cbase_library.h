@@ -10,6 +10,7 @@
 #endif // __cplusplus
 
 #include <emf_core_base/emf_cbase_bool_t.h>
+#include <emf_core_base/emf_cbase_error_t.h>
 #include <emf_core_base/emf_cbase_macros.h>
 
 #define EMF_CBASE_LIBRARY_LOADER_TYPE_MAX_LENGTH 64
@@ -36,34 +37,10 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_fn_t, void, void)
 typedef enum emf_cbase_library_predefined_handles_t : int32_t {
     emf_cbase_library_predefined_handles_native = 0,
 } emf_cbase_library_predefined_handles_t;
-
-typedef enum emf_cbase_library_error_t : int32_t {
-    emf_cbase_library_error_library_path_not_found = 0,
-    emf_cbase_library_error_library_handle_invalid = 1,
-    emf_cbase_library_error_loader_handle_invalid = 2,
-    emf_cbase_library_error_loader_library_handle_invalid = 3,
-    emf_cbase_library_error_library_type_invalid = 4,
-    emf_cbase_library_error_library_type_not_found = 5,
-    emf_cbase_library_error_duplicate_library_type = 6,
-    emf_cbase_library_error_symbol_not_found = 7,
-    emf_cbase_library_error_buffer_overflow = 8,
-} emf_cbase_library_error_t;
 #else
 typedef int32_t emf_cbase_library_predefined_handles_t;
 
 #define emf_cbase_library_predefined_handles_native (emf_cbase_library_predefined_handles_t)0
-
-typedef int32_t emf_cbase_library_error_t;
-
-#define emf_cbase_library_error_library_path_not_found (emf_cbase_library_error_t)0
-#define emf_cbase_library_error_library_handle_invalid (emf_cbase_library_error_t)1
-#define emf_cbase_library_error_loader_handle_invalid (emf_cbase_library_error_t)2
-#define emf_cbase_library_error_loader_library_handle_invalid (emf_cbase_library_error_t)3
-#define emf_cbase_library_error_library_type_invalid (emf_cbase_library_error_t)4
-#define emf_cbase_library_error_library_type_not_found (emf_cbase_library_error_t)5
-#define emf_cbase_library_error_duplicate_library_type (emf_cbase_library_error_t)6
-#define emf_cbase_library_error_symbol_not_found (emf_cbase_library_error_t)7
-#define emf_cbase_library_error_buffer_overflow (emf_cbase_library_error_t)8
 #endif // EMF_CBASE_USE_ENUMS
 
 typedef EMF_CBASE_OS_PATH_CHAR emf_cbase_os_path_char_t;
@@ -90,14 +67,13 @@ typedef struct emf_cbase_fn_symbol_t {
 
 EMF_CBASE_FIXED_BUFFER_TYPEDEF(emf_cbase_library_type_t, char, EMF_CBASE_LIBRARY_LOADER_TYPE_MAX_LENGTH)
 EMF_CBASE_SPAN_TYPEDEF(emf_cbase_library_type_span_t, emf_cbase_library_type_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_result_t, int8_t, emf_cbase_library_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_size_result_t, size_t, emf_cbase_library_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_handle_result_t, emf_cbase_library_handle_t, emf_cbase_library_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_loader_handle_result_t, emf_cbase_library_loader_handle_t, emf_cbase_library_error_t)
-EMF_CBASE_RESULT_TYPEDEF(
-    emf_cbase_internal_library_handle_result_t, emf_cbase_internal_library_handle_t, emf_cbase_library_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_data_symbol_result_t, emf_cbase_data_symbol_t, emf_cbase_library_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_fn_symbol_result_t, emf_cbase_fn_symbol_t, emf_cbase_library_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_result_t, int8_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_size_result_t, size_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_handle_result_t, emf_cbase_library_handle_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_loader_handle_result_t, emf_cbase_library_loader_handle_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_internal_library_handle_result_t, emf_cbase_internal_library_handle_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_data_symbol_result_t, emf_cbase_data_symbol_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_fn_symbol_result_t, emf_cbase_fn_symbol_t)
 
 // library loader interface
 typedef struct emf_cbase_library_loader_t emf_cbase_library_loader_t;
@@ -126,8 +102,8 @@ typedef struct emf_cbase_library_loader_interface_t {
     emf_cbase_library_loader_interface_get_internal_interface_fn_t EMF_CBASE_NOT_NULL get_internal_interface_fn;
 } emf_cbase_library_loader_interface_t;
 
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_library_loader_interface_result_t,
-    const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL, emf_cbase_library_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(
+    emf_cbase_library_loader_interface_result_t, const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL)
 
 // native library loader interface
 #if defined(Win32) || defined(_WIN32)
@@ -146,8 +122,8 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext_fn_t
     const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path, int flags)
 #endif // defined(Win32) || defined(_WIN32)
 
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_native_library_handle_result_t, emf_cbase_native_library_handle_fn_t EMF_CBASE_MAYBE_NULL,
-    emf_cbase_library_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(
+    emf_cbase_native_library_handle_result_t, emf_cbase_native_library_handle_fn_t EMF_CBASE_MAYBE_NULL)
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_get_native_handle_fn_t, emf_cbase_native_library_handle_result_t,
     emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_internal_library_handle_t internal_handle)

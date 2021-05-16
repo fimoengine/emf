@@ -8,6 +8,7 @@
 #endif // __cplusplus
 
 #include <emf_core_base/emf_cbase_bool_t.h>
+#include <emf_core_base/emf_cbase_error_t.h>
 #include <emf_core_base/emf_cbase_fn_ptr_id_t.h>
 #include <emf_core_base/emf_cbase_macros.h>
 
@@ -39,7 +40,7 @@ typedef struct emf_cbase_sync_handler_interface_t {
 // termination
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_shutdown_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module)
 EMF_CBASE_FUNCTION_PTR_T(
-    emf_cbase_sys_panic_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const char* EMF_CBASE_MAYBE_NULL error)
+    emf_cbase_sys_panic_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_error_optional_t error)
 
 // queries
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_has_function_fn_t, EMF_CBASE_NODISCARD emf_cbase_bool_t,
