@@ -9,6 +9,7 @@
 #include <stdint.h>
 #endif // __cplusplus
 
+#include <emf_core_base/emf_cbase_error_t.h>
 #include <emf_core_base/emf_cbase_fn_ptr_id_t.h>
 #include <emf_core_base/emf_cbase_library.h>
 #include <emf_core_base/emf_cbase_macros.h>
@@ -37,21 +38,6 @@ typedef enum emf_cbase_module_predefined_handles_t : int32_t {
     emf_cbase_module_predefined_handles_native = 0,
 } emf_cbase_module_predefined_handles_t;
 
-typedef enum emf_cbase_module_error_t : int32_t {
-    emf_cbase_module_error_path_invalid = 0,
-    emf_cbase_module_error_module_state_invalid = 1,
-    emf_cbase_module_error_module_handle_invalid = 2,
-    emf_cbase_module_error_loader_handle_invalid = 3,
-    emf_cbase_module_error_internal_handle_invalid = 4,
-    emf_cbase_module_error_module_type_invalid = 5,
-    emf_cbase_module_error_module_type_not_found = 6,
-    emf_cbase_module_error_duplicate_module_type = 7,
-    emf_cbase_module_error_interface_not_found = 8,
-    emf_cbase_module_error_duplicate_interface = 9,
-    emf_cbase_module_error_module_dependency_not_found = 10,
-    emf_cbase_module_error_buffer_overflow = 11,
-} emf_cbase_module_error_t;
-
 typedef enum emf_cbase_module_status_t : int32_t {
     emf_cbase_module_status_unloaded = 0,
     emf_cbase_module_status_terminated = 1,
@@ -61,21 +47,6 @@ typedef enum emf_cbase_module_status_t : int32_t {
 typedef int32_t emf_cbase_module_predefined_handles_t;
 
 #define emf_cbase_module_predefined_handles_native (emf_cbase_module_predefined_handles_t)0
-
-typedef int32_t emf_cbase_module_error_t;
-
-#define emf_cbase_module_error_path_invalid (emf_cbase_module_error_t)0
-#define emf_cbase_module_error_module_state_invalid (emf_cbase_module_error_t)1
-#define emf_cbase_module_error_module_handle_invalid (emf_cbase_module_error_t)2
-#define emf_cbase_module_error_loader_handle_invalid (emf_cbase_module_error_t)3
-#define emf_cbase_module_error_internal_handle_invalid (emf_cbase_module_error_t)4
-#define emf_cbase_module_error_module_type_invalid (emf_cbase_module_error_t)5
-#define emf_cbase_module_error_module_type_not_found (emf_cbase_module_error_t)6
-#define emf_cbase_module_error_duplicate_module_type (emf_cbase_module_error_t)7
-#define emf_cbase_module_error_interface_not_found (emf_cbase_module_error_t)8
-#define emf_cbase_module_error_duplicate_interface (emf_cbase_module_error_t)9
-#define emf_cbase_module_error_module_dependency_not_found (emf_cbase_module_error_t)10
-#define emf_cbase_module_error_buffer_overflow (emf_cbase_module_error_t)11
 
 typedef int32_t emf_cbase_module_status_t;
 
@@ -124,19 +95,16 @@ typedef struct emf_cbase_interface_descriptor_t {
 EMF_CBASE_SPAN_TYPEDEF(emf_cbase_interface_descriptor_span_t, emf_cbase_interface_descriptor_t)
 EMF_CBASE_SPAN_TYPEDEF(emf_cbase_interface_descriptor_const_span_t, const emf_cbase_interface_descriptor_t)
 
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_result_t, int8_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_size_result_t, size_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_status_result_t, emf_cbase_module_status_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_handle_result_t, emf_cbase_module_handle_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(
-    emf_cbase_os_path_char_result_t, const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_interface_result_t, emf_cbase_module_interface_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(
-    emf_cbase_module_info_ptr_result_t, const emf_cbase_module_info_t* EMF_CBASE_NOT_NULL, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_loader_handle_result_t, emf_cbase_module_loader_handle_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_internal_module_handle_result_t, emf_cbase_internal_module_handle_t, emf_cbase_module_error_t)
-EMF_CBASE_RESULT_TYPEDEF(
-    emf_cbase_interface_descriptor_const_span_result_t, emf_cbase_interface_descriptor_const_span_t, emf_cbase_module_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_result_t, int8_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_size_result_t, size_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_status_result_t, emf_cbase_module_status_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_handle_result_t, emf_cbase_module_handle_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_os_path_char_result_t, const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_interface_result_t, emf_cbase_module_interface_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_info_ptr_result_t, const emf_cbase_module_info_t* EMF_CBASE_NOT_NULL)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_loader_handle_result_t, emf_cbase_module_loader_handle_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_internal_module_handle_result_t, emf_cbase_internal_module_handle_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_interface_descriptor_const_span_result_t, emf_cbase_interface_descriptor_const_span_t)
 
 // module loader interface
 typedef struct emf_cbase_module_loader_t emf_cbase_module_loader_t;
@@ -197,13 +165,12 @@ typedef struct emf_cbase_module_loader_interface_t {
     emf_cbase_module_loader_interface_get_internal_interface_fn_t EMF_CBASE_NOT_NULL get_internal_interface_fn;
 } emf_cbase_module_loader_interface_t;
 
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_module_loader_interface_result_t,
-    const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL, emf_cbase_module_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(
+    emf_cbase_module_loader_interface_result_t, const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL)
 
 // native module interface
 typedef struct emf_cbase_native_module_t emf_cbase_native_module_t;
-EMF_CBASE_RESULT_TYPEDEF(
-    emf_cbase_native_module_ptr_result_t, emf_cbase_native_module_t* EMF_CBASE_MAYBE_NULL, emf_cbase_module_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_native_module_ptr_result_t, emf_cbase_native_module_t* EMF_CBASE_MAYBE_NULL)
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_interface_load_fn_t, EMF_CBASE_NODISCARD emf_cbase_native_module_ptr_result_t,
     emf_cbase_module_handle_t module_handle, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
@@ -242,8 +209,8 @@ typedef struct emf_cbase_native_module_interface_t {
 } emf_cbase_native_module_interface_t;
 
 // native module loader interface
-EMF_CBASE_RESULT_TYPEDEF(emf_cbase_native_module_interface_ptr_result_t,
-    const emf_cbase_native_module_interface_t* EMF_CBASE_NOT_NULL, emf_cbase_module_error_t)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(
+    emf_cbase_native_module_interface_ptr_result_t, const emf_cbase_native_module_interface_t* EMF_CBASE_NOT_NULL)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_module_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_native_module_ptr_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
     emf_cbase_internal_module_handle_t module_handle)

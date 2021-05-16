@@ -1,6 +1,7 @@
 #ifndef EMF_CBASE_EXT_UNWIND_EMF_UNWIND_INTERNAL_H
 #define EMF_CBASE_EXT_UNWIND_EMF_UNWIND_INTERNAL_H
 
+#include <emf_core_base/emf_cbase_error_t.h>
 #include <emf_core_base/emf_cbase_sys.h>
 
 #define EMF_CBASE_EXT_UNWIND_INTERNAL_INTERFACE_NAME "emf::cbase::unwind_internal"
@@ -22,7 +23,7 @@ typedef struct emf_cbase_ext_unw_int_context_t emf_cbase_ext_unw_int_context_t;
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_ext_unw_int_shutdown_fn_t, void, emf_cbase_ext_unw_int_context_t* EMF_CBASE_MAYBE_NULL context)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_ext_unw_int_panic_fn_t, void, emf_cbase_ext_unw_int_context_t* EMF_CBASE_MAYBE_NULL context,
-    const char* EMF_CBASE_MAYBE_NULL error)
+    emf_cbase_error_optional_t error)
 
 // unwind internal api
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_ext_unw_int_set_context_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
