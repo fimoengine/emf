@@ -38,7 +38,9 @@ def cli():
 @click.command()
 @click.argument('version', type=click.File('r'))
 @click.argument('output', type=click.File('w'))
-@click.option('--source', default=7, help='1: Major, 2: Minor, 3: Patch, 4: Pre-release type, 5: Pre-release build, 6: Build, 7: Version, 8: Long version, 9: Full version')
+@click.option('--source', default=6,
+              help='0: Major, 1: Minor, 2: Patch, 3: Pre-release type, 4: Pre-release build, 5: Build, 6: Version, '
+                   '7: Long version, 8: Full version')
 @click.option('--build', default=-1, help='The build version (-1 for UNIX timestamp, -2 for embedded build).')
 def extract(version, output, source, build):
     version_dict = json.load(version)
@@ -106,8 +108,10 @@ def print(version, build):
 @click.option('--major_key', default='MAJOR', help='The keyword to replace with the major number.')
 @click.option('--minor_key', default='MINOR', help='The keyword to replace with the minor number.')
 @click.option('--patch_key', default='PATCH', help='The keyword to replace with the patch number.')
-@click.option('--pre_release_type_key', default='RELEASE_TYPE', help='The keyword to replace with the pre-release type number.')
-@click.option('--pre_release_build_key', default='RELEASE_NUMBER', help='The keyword to replace with the pre-release build number.')
+@click.option('--pre_release_type_key', default='RELEASE_TYPE',
+              help='The keyword to replace with the pre-release type number.')
+@click.option('--pre_release_build_key', default='RELEASE_NUMBER',
+              help='The keyword to replace with the pre-release build number.')
 @click.option('--build_key', default='BUILD', help='The keyword to replace with the build number.')
 @click.option('--version_key', default='STRING_SHORT', help='The keyword to replace with the version string.')
 @click.option('--version_long_key', default='STRING_LONG', help='The keyword to replace with the long version string.')
@@ -115,7 +119,8 @@ def print(version, build):
 @click.option('--prefix', default='', help='The prefix of all keywords to replace.')
 @click.option('--suffix', default='', help='The suffix of all keywords to replace.')
 @click.option('--delimiter', default='!', help='The delimiter of all keywords to replace.')
-def replace(input, output, version, build, major_key, minor_key, patch_key, pre_release_type_key, pre_release_build_key, build_key, version_key, version_long_key, version_full_key, prefix, suffix, delimiter):
+def replace(input, output, version, build, major_key, minor_key, patch_key, pre_release_type_key, pre_release_build_key,
+            build_key, version_key, version_long_key, version_full_key, prefix, suffix, delimiter):
     version_dict = json.load(version)
     major = version_dict['major']
     minor = version_dict['minor']
