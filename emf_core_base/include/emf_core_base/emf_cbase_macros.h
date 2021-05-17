@@ -93,20 +93,20 @@
 
 #define EMF_CBASE_RESULT(Name, ResT, ErrT)                                                                                       \
     struct Name {                                                                                                                \
+        int8_t tag;                                                                                                              \
         union {                                                                                                                  \
-            ResT result;                                                                                                         \
-            ErrT error;                                                                                                          \
+            ResT ok;                                                                                                             \
+            ErrT err;                                                                                                            \
         };                                                                                                                       \
-        emf_cbase_bool_t has_error;                                                                                              \
     }
 
 #define EMF_CBASE_OPTIONAL(Name, T)                                                                                              \
     struct Name {                                                                                                                \
+        int8_t tag;                                                                                                              \
         union {                                                                                                                  \
-            T value;                                                                                                             \
-            int8_t _dummy;                                                                                                       \
+            int8_t _none;                                                                                                        \
+            T some;                                                                                                              \
         };                                                                                                                       \
-        emf_cbase_bool_t has_value;                                                                                              \
     }
 
 #define EMF_CBASE_SPAN_TYPEDEF(Name, T) typedef EMF_CBASE_SPAN(Name, T) Name;
