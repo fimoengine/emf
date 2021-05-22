@@ -44,6 +44,7 @@ typedef int32_t emf_cbase_library_predefined_handles_t;
 #endif // EMF_CBASE_USE_ENUMS
 
 typedef EMF_CBASE_OS_PATH_CHAR emf_cbase_os_path_char_t;
+EMF_CBASE_SPAN_TYPEDEF(emf_cbase_os_path_string_t, const emf_cbase_os_path_char_t)
 
 typedef struct emf_cbase_library_handle_t {
     int32_t id;
@@ -80,8 +81,7 @@ typedef struct emf_cbase_library_loader_t emf_cbase_library_loader_t;
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_load_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_internal_library_handle_result_t,
-    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
-    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path)
+    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_os_path_string_t library_path)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_unload_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_result_t,
     emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_internal_library_handle_t library_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_data_symbol_fn_t,
@@ -112,15 +112,14 @@ typedef void* emf_cbase_native_library_handle_fn_t;
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_internal_library_handle_result_t,
-    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
-    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path, void* EMF_CBASE_MAYBE_NULL h_file, uint32_t flags)
+    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_os_path_string_t library_path,
+    void* EMF_CBASE_MAYBE_NULL h_file, uint32_t flags)
 #else
 typedef void* emf_cbase_native_library_handle_fn_t;
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_interface_load_ext_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_internal_library_handle_result_t,
-    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
-    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path, int flags)
+    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_os_path_string_t library_path, int flags)
 #endif // defined(Win32) || defined(_WIN32)
 
 EMF_CBASE_ERROR_RESULT_TYPEDEF(
@@ -177,7 +176,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_internal_library_handle_fn_t,
 // library management
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_load_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_handle_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_loader_handle_t loader_handle,
-    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL library_path)
+    emf_cbase_os_path_string_t library_path)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_unload_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_data_symbol_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_data_symbol_result_t,

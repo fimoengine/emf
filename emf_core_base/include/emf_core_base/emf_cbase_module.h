@@ -99,7 +99,7 @@ EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_result_t, int8_t)
 EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_size_result_t, size_t)
 EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_status_result_t, emf_cbase_module_status_t)
 EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_handle_result_t, emf_cbase_module_handle_t)
-EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_os_path_char_result_t, const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL)
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_os_path_string_result_t, emf_cbase_os_path_string_t)
 EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_interface_result_t, emf_cbase_module_interface_t)
 EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_info_ptr_result_t, const emf_cbase_module_info_t* EMF_CBASE_NOT_NULL)
 EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_loader_handle_result_t, emf_cbase_module_loader_handle_t)
@@ -111,7 +111,7 @@ typedef struct emf_cbase_module_loader_t emf_cbase_module_loader_t;
 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_add_module_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_internal_module_handle_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
-    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL module_path)
+    emf_cbase_os_path_string_t module_path)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_remove_module_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_internal_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_load_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_result_t,
@@ -133,7 +133,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_info_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_module_info_ptr_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
     emf_cbase_internal_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_module_path_fn_t,
-    EMF_CBASE_NODISCARD emf_cbase_os_path_char_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
+    EMF_CBASE_NODISCARD emf_cbase_os_path_string_result_t, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader,
     emf_cbase_internal_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_load_dependencies_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
@@ -280,7 +280,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_internal_module_handle_fn_t,
 // module management
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_add_module_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_handle_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_loader_handle_t loader_handle,
-    const emf_cbase_os_path_char_t* EMF_CBASE_NOT_NULL module_path)
+    emf_cbase_os_path_string_t module_path)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_remove_module_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_load_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_result_t,
@@ -311,7 +311,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_exportable_interfaces_fn_t,
     emf_cbase_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_fetch_status_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_status_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_path_fn_t, EMF_CBASE_NODISCARD emf_cbase_os_path_char_result_t,
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_path_fn_t, EMF_CBASE_NODISCARD emf_cbase_os_path_string_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_info_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_info_ptr_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_handle_t module_handle)
