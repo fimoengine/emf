@@ -109,9 +109,16 @@
         };                                                                                                                       \
     }
 
+#define EMF_CBASE_FAT_PTR(Name, Data, VTable)                                                                                    \
+    struct Name {                                                                                                                \
+        Data* EMF_CBASE_MAYBE_NULL data;                                                                                         \
+        const VTable* EMF_CBASE_NOT_NULL vtable;                                                                                 \
+    }
+
 #define EMF_CBASE_SPAN_TYPEDEF(Name, T) typedef EMF_CBASE_SPAN(Name, T) Name;
 #define EMF_CBASE_FIXED_BUFFER_TYPEDEF(Name, T, Length) typedef EMF_CBASE_FIXED_BUFFER(Name, T, Length) Name;
 #define EMF_CBASE_RESULT_TYPEDEF(Name, ResT, ErrT) typedef EMF_CBASE_RESULT(Name, ResT, ErrT) Name;
 #define EMF_CBASE_OPTIONAL_TYPEDEF(Name, T) typedef EMF_CBASE_OPTIONAL(Name, T) Name;
+#define EMF_CBASE_FAT_PTR_TYPEDEF(Name, Data, VTable) typedef EMF_CBASE_FAT_PTR(Name, Data, VTable) Name;
 
 #endif // !EMF_CORE_BASE_EMF_CBASE_MACROS_H
