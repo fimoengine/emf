@@ -30,23 +30,13 @@ typedef struct emf_cbase_error_info_vtable_t {
     emf_cbase_error_info_vtable_as_str_fn EMF_CBASE_NOT_NULL as_str_fn;
 } emf_cbase_error_info_vtable_t;
 
-typedef struct emf_cbase_error_info_t {
-    emf_cbase_error_info_data_t* EMF_CBASE_MAYBE_NULL data;
-    const emf_cbase_error_info_vtable_t* EMF_CBASE_NOT_NULL vtable;
-} emf_cbase_error_info_t;
+EMF_CBASE_FAT_PTR_TYPEDEF(emf_cbase_error_info_t, emf_cbase_error_info_data_t, emf_cbase_error_info_vtable_t)
 
 typedef struct emf_cbase_error_data_t emf_cbase_error_data_t;
 typedef struct emf_cbase_error_vtable_t emf_cbase_error_vtable_t;
 
-typedef struct emf_cbase_error_t {
-    emf_cbase_error_info_data_t* EMF_CBASE_MAYBE_NULL data;
-    const emf_cbase_error_vtable_t* EMF_CBASE_NOT_NULL vtable;
-} emf_cbase_error_t;
-
-typedef struct emf_cbase_error_ref_t {
-    const emf_cbase_error_info_data_t* EMF_CBASE_MAYBE_NULL data;
-    const emf_cbase_error_vtable_t* EMF_CBASE_NOT_NULL vtable;
-} emf_cbase_error_ref_t;
+EMF_CBASE_FAT_PTR_TYPEDEF(emf_cbase_error_t, emf_cbase_error_data_t, emf_cbase_error_vtable_t)
+EMF_CBASE_FAT_PTR_TYPEDEF(emf_cbase_error_ref_t, const emf_cbase_error_data_t, emf_cbase_error_vtable_t)
 
 EMF_CBASE_OPTIONAL_TYPEDEF(emf_cbase_error_optional_t, emf_cbase_error_t)
 EMF_CBASE_OPTIONAL_TYPEDEF(emf_cbase_error_ref_optional_t, emf_cbase_error_ref_t)
