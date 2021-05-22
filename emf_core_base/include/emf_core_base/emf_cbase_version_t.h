@@ -58,8 +58,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_new_full_fn_t, EMF_CBASE_NODISCARD em
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, int32_t major, int32_t minor, int32_t patch,
     emf_cbase_version_release_t release_type, int8_t release_number, int64_t build)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_from_string_fn_t, EMF_CBASE_NODISCARD emf_cbase_version_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
-    const emf_cbase_version_const_string_buffer_t* EMF_CBASE_NOT_NULL version_string)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_version_const_string_buffer_t version_string)
 
 // strings
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_string_length_short_fn_t, EMF_CBASE_NODISCARD size_t,
@@ -70,16 +69,15 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_string_length_full_fn_t, EMF_CBASE_NO
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_version_t* EMF_CBASE_NOT_NULL version)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_as_string_short_fn_t, EMF_CBASE_NODISCARD emf_cbase_version_size_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_version_t* EMF_CBASE_NOT_NULL version,
-    emf_cbase_version_string_buffer_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_version_string_buffer_t buffer)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_as_string_long_fn_t, EMF_CBASE_NODISCARD emf_cbase_version_size_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_version_t* EMF_CBASE_NOT_NULL version,
-    emf_cbase_version_string_buffer_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_version_string_buffer_t buffer)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_as_string_full_fn_t, EMF_CBASE_NODISCARD emf_cbase_version_size_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_version_t* EMF_CBASE_NOT_NULL version,
-    emf_cbase_version_string_buffer_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_version_string_buffer_t buffer)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_string_is_valid_fn_t, EMF_CBASE_NODISCARD emf_cbase_bool_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
-    const emf_cbase_version_const_string_buffer_t* EMF_CBASE_NOT_NULL version_string)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_version_const_string_buffer_t version_string)
 
 // comparisons
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_version_compare_fn_t, EMF_CBASE_NODISCARD int32_t,
