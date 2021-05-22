@@ -90,20 +90,21 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_data_symbol_fn_t
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_function_symbol_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_library_fn_symbol_result_t, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
     emf_cbase_internal_library_handle_t library_handle, const char* EMF_CBASE_NOT_NULL symbol_name)
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_internal_interface_fn_t,
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_extended_vtable_fn_t,
     EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader)
 
-typedef struct emf_cbase_library_loader_interface_t {
-    emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader;
+typedef struct emf_cbase_library_loader_interface_vtable_t {
     emf_cbase_library_loader_interface_load_fn_t EMF_CBASE_NOT_NULL load_fn;
     emf_cbase_library_loader_interface_unload_fn_t EMF_CBASE_NOT_NULL unload_fn;
     emf_cbase_library_loader_interface_get_data_symbol_fn_t EMF_CBASE_NOT_NULL get_data_symbol_fn;
     emf_cbase_library_loader_interface_get_function_symbol_fn_t EMF_CBASE_NOT_NULL get_function_fn;
-    emf_cbase_library_loader_interface_get_internal_interface_fn_t EMF_CBASE_NOT_NULL get_internal_interface_fn;
-} emf_cbase_library_loader_interface_t;
+    emf_cbase_library_loader_interface_get_extended_vtable_fn_t EMF_CBASE_NOT_NULL get_extended_vtable_fn;
+} emf_cbase_library_loader_interface_vtable_t;
 
-EMF_CBASE_ERROR_RESULT_TYPEDEF(
-    emf_cbase_library_loader_interface_result_t, const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL)
+EMF_CBASE_FAT_PTR_TYPEDEF(
+    emf_cbase_library_loader_interface_t, emf_cbase_library_loader_t, emf_cbase_library_loader_interface_vtable_t)
+
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_library_loader_interface_result_t, emf_cbase_library_loader_interface_t)
 
 // native library loader interface
 #if defined(Win32) || defined(_WIN32)
@@ -128,17 +129,16 @@ EMF_CBASE_ERROR_RESULT_TYPEDEF(
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_library_loader_get_native_handle_fn_t, emf_cbase_native_library_handle_result_t,
     emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_internal_library_handle_t internal_handle)
 
-typedef struct emf_cbase_native_library_loader_interface_t {
-    const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL library_loader_interface;
+typedef struct emf_cbase_native_library_loader_vtable_t {
+    const emf_cbase_library_loader_interface_vtable_t* EMF_CBASE_NOT_NULL loader_vtable;
     emf_cbase_native_library_loader_interface_load_ext_fn_t EMF_CBASE_NOT_NULL load_ext_fn;
     emf_cbase_native_library_loader_get_native_handle_fn_t EMF_CBASE_NOT_NULL get_native_handle_fn;
-} emf_cbase_native_library_loader_interface_t;
+} emf_cbase_native_library_loader_vtable_t;
 
 // library api
 // loader management
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_register_loader_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_loader_handle_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
-    const emf_cbase_library_loader_interface_t* EMF_CBASE_NOT_NULL loader_interface,
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_loader_interface_t loader_interface,
     const emf_cbase_library_type_t* EMF_CBASE_NOT_NULL library_type)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_unregister_loader_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_loader_handle_t loader_handle)

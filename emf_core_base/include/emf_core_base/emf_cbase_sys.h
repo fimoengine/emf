@@ -29,12 +29,13 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sync_handler_try_lock_fn_t, EMF_CBASE_NODISCA
     emf_cbase_sync_handler_t* EMF_CBASE_MAYBE_NULL sync_handler)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sync_handler_unlock_fn_t, void, emf_cbase_sync_handler_t* EMF_CBASE_MAYBE_NULL sync_handler)
 
-typedef struct emf_cbase_sync_handler_interface_t {
-    emf_cbase_sync_handler_t* EMF_CBASE_MAYBE_NULL sync_handler;
+typedef struct emf_cbase_sync_handler_interface_vtable_t {
     emf_cbase_sync_handler_lock_fn_t EMF_CBASE_NOT_NULL lock_fn;
     emf_cbase_sync_handler_try_lock_fn_t EMF_CBASE_NOT_NULL try_lock_fn;
     emf_cbase_sync_handler_unlock_fn_t EMF_CBASE_NOT_NULL unlock_fn;
-} emf_cbase_sync_handler_interface_t;
+} emf_cbase_sync_handler_interface_vtable_t;
+
+EMF_CBASE_FAT_PTR_TYPEDEF(emf_cbase_sync_handler_interface_t, emf_cbase_sync_handler_t, emf_cbase_sync_handler_interface_vtable_t)
 
 // sys api
 // termination
@@ -55,11 +56,10 @@ EMF_CBASE_FUNCTION_PTR_T(
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_unlock_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module)
 
 // manual synchronization
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_get_sync_handler_fn_t,
-    EMF_CBASE_NODISCARD const emf_cbase_sync_handler_interface_t* EMF_CBASE_NOT_NULL,
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_get_sync_handler_fn_t, EMF_CBASE_NODISCARD emf_cbase_sync_handler_interface_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_sys_set_sync_handler_fn_t, void, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
-    const emf_cbase_sync_handler_interface_t* EMF_CBASE_MAYBE_NULL sync_handler)
+    emf_cbase_sync_handler_interface_t sync_handler)
 
 #ifdef __cplusplus
 }

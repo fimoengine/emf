@@ -144,11 +144,10 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_runtime_dependenc
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_exportable_interfaces_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_interface_descriptor_const_span_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_internal_module_handle_t module_handle)
-EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_internal_interface_fn_t,
+EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_loader_interface_get_extended_vtable_fn_t,
     EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader)
 
-typedef struct emf_cbase_module_loader_interface_t {
-    emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader;
+typedef struct emf_cbase_module_loader_interface_vtable_t {
     emf_cbase_module_loader_interface_add_module_fn_t EMF_CBASE_NOT_NULL add_module_fn;
     emf_cbase_module_loader_interface_remove_module_fn_t EMF_CBASE_NOT_NULL remove_module_fn;
     emf_cbase_module_loader_interface_load_fn_t EMF_CBASE_NOT_NULL load_fn;
@@ -162,11 +161,13 @@ typedef struct emf_cbase_module_loader_interface_t {
     emf_cbase_module_loader_interface_get_load_dependencies_fn_t EMF_CBASE_NOT_NULL get_load_dependencies_fn;
     emf_cbase_module_loader_interface_get_runtime_dependencies_fn_t EMF_CBASE_NOT_NULL get_runtime_dependencies_fn;
     emf_cbase_module_loader_interface_get_exportable_interfaces_fn_t EMF_CBASE_NOT_NULL get_exportable_interfaces_fn;
-    emf_cbase_module_loader_interface_get_internal_interface_fn_t EMF_CBASE_NOT_NULL get_internal_interface_fn;
-} emf_cbase_module_loader_interface_t;
+    emf_cbase_module_loader_interface_get_extended_vtable_fn_t EMF_CBASE_NOT_NULL get_extended_vtable_fn;
+} emf_cbase_module_loader_interface_vtable_t;
 
-EMF_CBASE_ERROR_RESULT_TYPEDEF(
-    emf_cbase_module_loader_interface_result_t, const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL)
+EMF_CBASE_FAT_PTR_TYPEDEF(
+    emf_cbase_module_loader_interface_t, emf_cbase_module_loader_t, emf_cbase_module_loader_interface_vtable_t)
+
+EMF_CBASE_ERROR_RESULT_TYPEDEF(emf_cbase_module_loader_interface_result_t, emf_cbase_module_loader_interface_t)
 
 // native module interface
 typedef struct emf_cbase_native_module_t emf_cbase_native_module_t;
@@ -218,16 +219,16 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_native_module_loader_interface_get_native_mod
     EMF_CBASE_NODISCARD emf_cbase_native_module_interface_ptr_result_t,
     emf_cbase_module_loader_t* EMF_CBASE_MAYBE_NULL module_loader, emf_cbase_internal_module_handle_t module_handle)
 
-typedef struct emf_cbase_native_module_loader_interface_t {
-    const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL module_loader_interface;
+typedef struct emf_cbase_native_module_loader_vtable_t {
+    const emf_cbase_module_loader_interface_vtable_t* EMF_CBASE_NOT_NULL loader_vtable;
     emf_cbase_native_module_loader_interface_get_native_module_fn_t EMF_CBASE_NOT_NULL get_native_module_fn;
     emf_cbase_native_module_loader_interface_get_native_module_interface_fn_t EMF_CBASE_NOT_NULL get_native_module_interface_fn;
-} emf_cbase_native_module_loader_interface_t;
+} emf_cbase_native_module_loader_vtable_t;
 
 // module api
 // loader management
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_register_loader_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_loader_handle_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_module_loader_interface_t* EMF_CBASE_NOT_NULL loader_interface,
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_loader_interface_t loader_interface,
     const emf_cbase_module_type_t* EMF_CBASE_NOT_NULL module_type)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_unregister_loader_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_loader_handle_t loader_handle)
