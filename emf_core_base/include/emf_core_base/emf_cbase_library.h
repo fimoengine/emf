@@ -160,7 +160,7 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_library_exists_fn_t, EMF_CBASE_NODISC
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_type_exists_fn_t, EMF_CBASE_NODISCARD emf_cbase_bool_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_library_type_t* EMF_CBASE_NOT_NULL library_type)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_library_types_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_size_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_type_span_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_type_span_t buffer)
 
 // internal library management
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_create_library_handle_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_handle_t,

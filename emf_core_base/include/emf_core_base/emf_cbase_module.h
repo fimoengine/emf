@@ -256,11 +256,11 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_type_exists_fn_t, EMF_CBASE_NODISCARD 
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_exported_interface_exists_fn_t, EMF_CBASE_NODISCARD emf_cbase_bool_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_modules_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_size_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_info_span_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_info_span_t buffer)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_module_types_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_size_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_type_span_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_module_type_span_t buffer)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_exported_interfaces_fn_t, EMF_CBASE_NODISCARD emf_cbase_module_size_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_interface_descriptor_span_t* EMF_CBASE_NOT_NULL buffer)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_interface_descriptor_span_t buffer)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_module_get_exported_interface_handle_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_module_handle_result_t, emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module,
     const emf_cbase_interface_descriptor_t* EMF_CBASE_NOT_NULL interface)
