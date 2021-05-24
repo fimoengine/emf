@@ -45,6 +45,7 @@ typedef int32_t emf_cbase_library_predefined_handles_t;
 
 typedef EMF_CBASE_OS_PATH_CHAR emf_cbase_os_path_char_t;
 EMF_CBASE_SPAN_TYPEDEF(emf_cbase_os_path_string_t, const emf_cbase_os_path_char_t)
+EMF_CBASE_SPAN_TYPEDEF(emf_cbase_symbol_name_t, const char)
 
 typedef struct emf_cbase_library_handle_t {
     int32_t id;
@@ -86,10 +87,10 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_unload_fn_t, EMF_CBA
     emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader, emf_cbase_internal_library_handle_t library_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_data_symbol_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_library_data_symbol_result_t, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
-    emf_cbase_internal_library_handle_t library_handle, const char* EMF_CBASE_NOT_NULL symbol_name)
+    emf_cbase_internal_library_handle_t library_handle, emf_cbase_symbol_name_t symbol_name)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_function_symbol_fn_t,
     EMF_CBASE_NODISCARD emf_cbase_library_fn_symbol_result_t, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader,
-    emf_cbase_internal_library_handle_t library_handle, const char* EMF_CBASE_NOT_NULL symbol_name)
+    emf_cbase_internal_library_handle_t library_handle, emf_cbase_symbol_name_t symbol_name)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_loader_interface_get_extended_vtable_fn_t,
     EMF_CBASE_NODISCARD const void* EMF_CBASE_NOT_NULL, emf_cbase_library_loader_t* EMF_CBASE_MAYBE_NULL library_loader)
 
@@ -180,11 +181,9 @@ EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_load_fn_t, EMF_CBASE_NODISCARD emf_cb
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_unload_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_result_t,
     emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_data_symbol_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_data_symbol_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle,
-    const char* EMF_CBASE_NOT_NULL symbol_name)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle, emf_cbase_symbol_name_t symbol_name)
 EMF_CBASE_FUNCTION_PTR_T(emf_cbase_library_get_function_symbol_fn_t, EMF_CBASE_NODISCARD emf_cbase_library_fn_symbol_result_t,
-    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle,
-    const char* EMF_CBASE_NOT_NULL symbol_name)
+    emf_cbase_t* EMF_CBASE_MAYBE_NULL base_module, emf_cbase_library_handle_t library_handle, emf_cbase_symbol_name_t symbol_name)
 
 #ifdef __cplusplus
 }
